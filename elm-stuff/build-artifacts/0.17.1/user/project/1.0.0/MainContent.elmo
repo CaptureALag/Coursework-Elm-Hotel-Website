@@ -1,0 +1,100 @@
+var _user$project$MainContent$renderPageItem = function (hotel) {
+	return A2(
+		_elm_lang$html$Html$figure,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('page-item')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$img,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$src(
+						A2(_elm_lang$core$Basics_ops['++'], 'img/', hotel.bgPhotoUrl))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$figcaption,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$div,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('country-name')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(hotel.countryId)
+							])),
+						A2(
+						_elm_lang$html$Html$div,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('hotel-info')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text(hotel.name)
+							]))
+					]))
+			]));
+};
+var _user$project$MainContent$renderSortOption = F2(
+	function (model, option) {
+		return _elm_lang$html$Html$text(
+			_user$project$ModelUtils$sortingOptionLabel(option));
+	});
+var _user$project$MainContent$renderPageSortOptions = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('sort-options')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$label,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Сортувати за')
+					])),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('variants')
+					]),
+				A2(
+					_elm_lang$core$List$map,
+					_user$project$MainContent$renderSortOption(model),
+					_elm_lang$core$Native_List.fromArray(
+						[_user$project$Models$Popularity, _user$project$Models$Stars, _user$project$Models$Price])))
+			]));
+};
+var _user$project$MainContent$renderCurrentPage = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('current-page')
+			]),
+		A2(
+			_elm_lang$core$List_ops['::'],
+			_user$project$MainContent$renderPageSortOptions(model),
+			A2(
+				_elm_lang$core$List$map,
+				_user$project$MainContent$renderPageItem,
+				_user$project$ModelUtils$getHotelsOnCurrentPage(model))));
+};
+var _user$project$MainContent$renderMainContent = function (model) {
+	return _user$project$MainContent$renderCurrentPage(model);
+};

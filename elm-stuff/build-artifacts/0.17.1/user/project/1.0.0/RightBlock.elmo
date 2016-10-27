@@ -1,0 +1,199 @@
+var _user$project$RightBlock$renderRightBlockReviews = function (appState) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$classList(
+				_elm_lang$core$Native_List.fromArray(
+					[
+						{ctor: '_Tuple2', _0: 'reviews', _1: true},
+						{
+						ctor: '_Tuple2',
+						_0: 'hidden',
+						_1: !_elm_lang$core$Native_Utils.eq(appState.selectedNavIcon, 'icon-reviews')
+					}
+					]))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text('Тут будуть відгуки')
+			]));
+};
+var _user$project$RightBlock$renderRightBlockCallback = function (appState) {
+	return A2(
+		_elm_lang$html$Html$form,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$classList(
+				_elm_lang$core$Native_List.fromArray(
+					[
+						{ctor: '_Tuple2', _0: 'callback-form', _1: true},
+						{
+						ctor: '_Tuple2',
+						_0: 'hidden',
+						_1: !_elm_lang$core$Native_Utils.eq(appState.selectedNavIcon, 'icon-callback')
+					}
+					]))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$h4,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Замовлення дзвінка')
+					])),
+				A2(
+				_elm_lang$html$Html$input,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$type$('text'),
+						_elm_lang$html$Html_Attributes$name('name'),
+						_elm_lang$html$Html_Attributes$placeholder('Ім\'я')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$input,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$type$('text'),
+						_elm_lang$html$Html_Attributes$name('phone'),
+						_elm_lang$html$Html_Attributes$placeholder('Телефон')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$input,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$type$('text'),
+						_elm_lang$html$Html_Attributes$name('comment'),
+						_elm_lang$html$Html_Attributes$placeholder('Коментар')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$type$('button')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('OK')
+					]))
+			]));
+};
+var _user$project$RightBlock$renderRightBlockNavigation = F2(
+	function (appState, appContent) {
+		return A2(
+			_elm_lang$html$Html$nav,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$classList(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							{
+							ctor: '_Tuple2',
+							_0: 'hidden',
+							_1: !_elm_lang$core$Native_Utils.eq(appState.selectedNavIcon, 'icon-navigation')
+						}
+						]))
+				]),
+			A2(
+				_elm_lang$core$List$append,
+				A2(
+					_elm_lang$core$List$map,
+					function (cntry) {
+						return A2(
+							_elm_lang$html$Html$a,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Attributes$class('link-country')
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text(
+									A2(_elm_lang$core$Basics_ops['++'], 'Тури на ', cntry.nameLocativeCase))
+								]));
+					},
+					appContent.countries),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$a,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$class('link-contacts')
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html$text('Контакти')
+							]))
+					])));
+	});
+var _user$project$RightBlock$renderTopMostNavIcons = function (appState) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('nav-icons')
+			]),
+		A2(
+			_elm_lang$core$List$map,
+			function (cls) {
+				return A2(
+					_elm_lang$html$Html$a,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$href('#'),
+							_elm_lang$html$Html_Attributes$style(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									{
+									ctor: '_Tuple2',
+									_0: 'background-image',
+									_1: A2(
+										_elm_lang$core$Basics_ops['++'],
+										'url(img/',
+										A2(_elm_lang$core$Basics_ops['++'], cls, '.png)'))
+								}
+								])),
+							_elm_lang$html$Html_Attributes$classList(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									{ctor: '_Tuple2', _0: 'nav-icon', _1: true},
+									{ctor: '_Tuple2', _0: cls, _1: true},
+									{
+									ctor: '_Tuple2',
+									_0: 'selected',
+									_1: _elm_lang$core$Native_Utils.eq(appState.selectedNavIcon, cls)
+								}
+								])),
+							_elm_lang$html$Html_Events$onClick(
+							_user$project$Models$NavIconClick(cls))
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			},
+			_elm_lang$core$Native_List.fromArray(
+				['icon-navigation', 'icon-callback', 'icon-reviews'])));
+};
+var _user$project$RightBlock$renderRightBlock = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('right-block')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_user$project$RightBlock$renderTopMostNavIcons(model.appState),
+				A2(_user$project$RightBlock$renderRightBlockNavigation, model.appState, model.appContent),
+				_user$project$RightBlock$renderRightBlockCallback(model.appState),
+				_user$project$RightBlock$renderRightBlockReviews(model.appState)
+			]));
+};

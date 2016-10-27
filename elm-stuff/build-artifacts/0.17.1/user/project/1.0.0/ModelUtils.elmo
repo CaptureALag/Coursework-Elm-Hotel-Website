@@ -1,0 +1,14 @@
+var _user$project$ModelUtils$sortingOptionLabel = function (opt) {
+	var _p0 = opt;
+	switch (_p0.ctor) {
+		case 'Popularity':
+			return 'Популярністю';
+		case 'Stars':
+			return 'Кількістю зірок';
+		default:
+			return 'Ціною';
+	}
+};
+var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
+	return A2(_elm_lang$core$List$take, 4, model.appContent.hotels);
+};

@@ -1,0 +1,49 @@
+ 
+
+.current-page {
+
+	width: calc(~"100% - 366px");
+	overflow: hidden;
+
+	& > figure.page-item {
+		
+		position: relative;
+
+		margin: 0;
+		height: 300px;
+
+		& > img {
+
+		}
+
+		& > figcaption {
+			position: absolute;
+			left: 0; right: 0; top: 0; bottom: 0;
+
+			& > .country-name {
+				position: absolute;
+				background: rgba(29,47,67,.25);
+				left: 0;
+				width: 300px;
+				top: 0;
+				bottom: 0;
+
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+			    font-size: 40px;
+			    text-transform: uppercase;
+			    color: rgba(255,255,255,0.6);
+			}
+
+			& > .hotel-info {
+				position: absolute;
+				background: rgba(29,47,67,.75);
+				left: 300px;
+				right: 0;
+				top: 0;
+				bottom: 0;
+			}
+		}
+	}
+}

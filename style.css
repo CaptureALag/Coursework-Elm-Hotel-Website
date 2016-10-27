@@ -1,0 +1,133 @@
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+input {
+    outline: 0;
+}
+
+button {
+    outline: 0;
+    cursor: pointer;
+}
+
+.right-block {
+    width: 366px;
+    float: right;
+    margin: 30px;
+}
+
+.right-block > .nav-icons {
+    display: flex;
+    justify-content: space-around;
+    margin: 25px 0;
+}
+
+.right-block .nav-icon {
+    display: inline-block;
+    width: 78px;
+    height: 78px;
+    background-repeat: no-repeat;
+    -webkit-filter: grayscale(80%);
+    filter: grayscale(80%);
+    transition: filter 0.3s, -webkit-filter 0.3s;
+}
+
+.right-block .nav-icon.selected, .right-block .nav-icon:hover {
+    -webkit-filter: grayscale(0%);
+    filter: grayscale(0%);
+}
+
+.right-block > nav, .callback-form, .reviews {
+	display: block;
+	overflow: hidden;
+	transition: height 0.5s, padding 0.5s;
+	height: 150px;
+	padding: 30px;
+}
+
+.right-block > nav.hidden, .callback-form.hidden, .reviews.hidden {
+	height: 0;
+	padding: 0 30px;
+}
+
+.right-block > nav {
+    background: #0A9DA5;
+    height: 200px;
+}
+
+.right-block > nav > a {
+    display: block;
+    color: white;
+    text-transform: uppercase;
+    font-size: 18px;
+    margin-bottom: 18px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.right-block > nav > a:hover {
+    opacity: 1;
+}
+
+.right-block > nav > .link-contacts {
+    margin-top: 44px;
+}
+
+.callback-form {
+    background: #F06767;
+    text-align: center;
+    height: 400px
+}
+
+.callback-form > h4 {
+    display: inline-block;
+    font-size: 24px;
+    margin: 0;
+    text-transform: uppercase;
+    color: white;
+    opacity: 0.8;
+}
+
+.callback-form > input {
+    display: block;
+    height: 30px;
+    padding: 10px;
+    width: 287px;
+    margin-top: 25px;
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 5px;
+    color: white;
+    transition: border-color 0.3s;
+}
+
+.callback-form > input:focus {
+    border-color: white;
+}
+
+.callback-form > input::-webkit-input-placeholder {
+    color: white;
+}
+
+.callback-form > button {
+    border-radius: 50%;
+    margin-top: 50px;
+    height: 50px;
+    width: 50px;
+    font-size: 21px;
+    background-color: rgba(255,255,255,0.7);
+    border: none;
+    color: #F06767;
+    transition: background-color 0.4s;
+}
+
+.callback-form > button:hover {
+    background-color: rgba(255,255,255,0.9)
+}
+
+.reviews {
+    background: #FFFF00;
+}
+

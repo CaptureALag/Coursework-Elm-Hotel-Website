@@ -1,0 +1,26 @@
+var _user$project$Content$renderCurrentPage = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('current-page')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text('keeek'),
+				_elm_lang$html$Html$text(
+				_elm_lang$core$Basics$toString(
+					_elm_lang$core$List$length(
+						_user$project$ModelUtils$getHotelsOnCurrentPage(model))))
+			]));
+};
+var _user$project$Content$renderContent2 = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('kek')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[]));
+};
