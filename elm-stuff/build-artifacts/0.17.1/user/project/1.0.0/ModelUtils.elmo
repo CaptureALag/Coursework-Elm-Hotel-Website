@@ -1,6 +1,22 @@
+var _user$project$ModelUtils$negateSortOrder = function (ord) {
+	var _p0 = ord;
+	if (_p0.ctor === 'Asc') {
+		return _user$project$Models$Desc;
+	} else {
+		return _user$project$Models$Asc;
+	}
+};
+var _user$project$ModelUtils$sortingOrderLabel = function (ord) {
+	var _p1 = ord;
+	if (_p1.ctor === 'Asc') {
+		return '▲';
+	} else {
+		return '▼';
+	}
+};
 var _user$project$ModelUtils$sortingOptionLabel = function (opt) {
-	var _p0 = opt;
-	switch (_p0.ctor) {
+	var _p2 = opt;
+	switch (_p2.ctor) {
 		case 'Popularity':
 			return 'Популярністю';
 		case 'Stars':
@@ -10,5 +26,37 @@ var _user$project$ModelUtils$sortingOptionLabel = function (opt) {
 	}
 };
 var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
-	return A2(_elm_lang$core$List$take, 4, model.appContent.hotels);
+	return A2(
+		_elm_lang$core$List$take,
+		4,
+		function (_p3) {
+			return function () {
+				var _p4 = model.appState.currentSortOrder;
+				if (_p4.ctor === 'Asc') {
+					return _elm_lang$core$Basics$identity;
+				} else {
+					return _elm_lang$core$List$reverse;
+				}
+			}()(
+				function () {
+					var _p5 = model.appState.currentSortOption;
+					switch (_p5.ctor) {
+						case 'Popularity':
+							return _elm_lang$core$List$sortBy(
+								function (_) {
+									return _.popularity;
+								});
+						case 'Stars':
+							return _elm_lang$core$List$sortBy(
+								function (_) {
+									return _.stars;
+								});
+						default:
+							return _elm_lang$core$List$sortBy(
+								function (_) {
+									return _.popularity;
+								});
+					}
+				}()(_p3));
+		}(model.appContent.hotels));
 };

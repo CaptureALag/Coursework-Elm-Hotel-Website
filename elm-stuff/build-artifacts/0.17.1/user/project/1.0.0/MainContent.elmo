@@ -40,15 +40,66 @@ var _user$project$MainContent$renderPageItem = function (hotel) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text(hotel.name)
+								A2(
+								_elm_lang$html$Html$div,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											'stars-',
+											_elm_lang$core$Basics$toString(hotel.stars)))
+									]),
+								A2(
+									_elm_lang$core$List$repeat,
+									hotel.stars,
+									A2(
+										_elm_lang$html$Html$div,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('star')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[])))),
+								A2(
+								_elm_lang$html$Html$h5,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(hotel.name)
+									]))
 							]))
 					]))
 			]));
 };
 var _user$project$MainContent$renderSortOption = F2(
 	function (model, option) {
-		return _elm_lang$html$Html$text(
-			_user$project$ModelUtils$sortingOptionLabel(option));
+		var currentOrd = model.appState.currentSortOrder;
+		var isSelected = _elm_lang$core$Native_Utils.eq(option, model.appState.currentSortOption);
+		return A2(
+			_elm_lang$html$Html$a,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$href('#'),
+					_elm_lang$html$Html_Attributes$classList(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'selected', _1: isSelected}
+						])),
+					_elm_lang$html$Html_Events$onClick(
+					A2(
+						_user$project$Models$SortOptionSelect,
+						option,
+						isSelected ? _user$project$ModelUtils$negateSortOrder(currentOrd) : _user$project$Models$Desc))
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(
+					_user$project$ModelUtils$sortingOptionLabel(option)),
+					_elm_lang$html$Html$text(
+					isSelected ? _user$project$ModelUtils$sortingOrderLabel(currentOrd) : '')
+				]));
 	});
 var _user$project$MainContent$renderPageSortOptions = function (model) {
 	return A2(

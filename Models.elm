@@ -3,7 +3,9 @@ module Models exposing(..)
 import Dict exposing (Dict)
 
 
-type Msg = NavIconClick String
+type Msg = 
+    NavIconClick String 
+  | SortOptionSelect SortOption SortOrder
 
 type alias Model =
     { appState : AppState
@@ -38,6 +40,7 @@ type alias Hotel =
     , name : String
     , popularity : Int
     , countryId : String
+    , stars : Int
     , bgPhotoUrl : String
     , photoUrls : List String
     , rooms : List Room    

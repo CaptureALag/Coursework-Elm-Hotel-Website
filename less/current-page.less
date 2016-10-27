@@ -5,6 +5,40 @@
 	width: calc(~"100% - 366px");
 	overflow: hidden;
 
+	& > .sort-options {
+		padding: 10px 0;
+		background: rgba(57, 91, 112, 1);
+		color: white;
+
+		& > * {
+			display: inline-block;
+		}
+
+		& > label {
+			width: 295px;
+			text-align: right;
+
+			margin-right: 10px;
+
+			opacity: 0.8;
+		}
+
+		& > .variants {
+			& > a {
+				color: white;
+				text-transform: lowercase;
+				opacity: 0.5;
+				margin: 0 20px;
+				&.selected {
+					opacity: 0.8;
+				}
+				&:hover {
+					text-decoration: underline;
+				}
+			}
+		}
+	}
+
 	& > figure.page-item {
 		
 		position: relative;
@@ -38,11 +72,34 @@
 
 			& > .hotel-info {
 				position: absolute;
-				background: rgba(29,47,67,.75);
+				background: linear-gradient(rgba(29, 47, 67, 1) 0%, rgba(29, 47, 67, 0.75) 25%,rgba(29, 47, 67, 0.75) 75%, rgba(29, 47, 67, 1) 100%);
 				left: 300px;
 				right: 0;
 				top: 0;
 				bottom: 0;
+
+				& > [class^=stars] {
+
+					float: right;
+					margin: 15px;
+
+					.star-loop(@i) when (@i > 0) {
+						&.stars-@{i} {
+							opacity: 0.4 + @i / 10;
+						}
+						.star-loop(@i - 1);
+					}
+					.star-loop(5);
+
+					& > .star {
+						margin-left: 5px;
+						display: inline-block;
+						background: url('../img/star1px.png');
+						width: 32px;
+						height: 32px;
+						background-repeat: no-repeat;
+					}
+				}
 			}
 		}
 	}

@@ -1,14 +1,25 @@
 var _user$project$Main$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
-		var appState = model.appState;
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{
-				appState: _elm_lang$core$Native_Utils.update(
-					appState,
-					{selectedNavIcon: _p0._0})
-			});
+		if (_p0.ctor === 'NavIconClick') {
+			var appState = model.appState;
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					appState: _elm_lang$core$Native_Utils.update(
+						appState,
+						{selectedNavIcon: _p0._0})
+				});
+		} else {
+			var appState = model.appState;
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					appState: _elm_lang$core$Native_Utils.update(
+						appState,
+						{currentSortOption: _p0._0, currentSortOrder: _p0._1})
+				});
+		}
 	});
 var _user$project$Main$view = function (model) {
 	return A2(
@@ -29,7 +40,7 @@ var _user$project$Main$main = {
 	main: _elm_lang$html$Html_App$beginnerProgram(
 		{
 			model: {
-				appState: {selectedNavIcon: 'icon-navigation', currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Asc, currentPage: 1},
+				appState: {selectedNavIcon: 'icon-navigation', currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Desc, currentPage: 1},
 				appContent: {
 					countries: _elm_lang$core$Native_List.fromArray(
 						[
@@ -45,6 +56,7 @@ var _user$project$Main$main = {
 							name: 'Cassandra Mare',
 							popularity: 1,
 							countryId: 'malta',
+							stars: 5,
 							bgPhotoUrl: 'bg_1.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),
@@ -56,6 +68,7 @@ var _user$project$Main$main = {
 							name: 'Akrathos Hotel',
 							popularity: 2,
 							countryId: 'ibiza',
+							stars: 4,
 							bgPhotoUrl: 'bg_2.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),
@@ -67,6 +80,7 @@ var _user$project$Main$main = {
 							name: 'Alara Hotel',
 							popularity: 3,
 							countryId: 'cyprus',
+							stars: 3,
 							bgPhotoUrl: 'bg_3.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),
@@ -78,6 +92,7 @@ var _user$project$Main$main = {
 							name: 'Boumerang',
 							popularity: 4,
 							countryId: 'crit',
+							stars: 4,
 							bgPhotoUrl: 'bg_4.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),

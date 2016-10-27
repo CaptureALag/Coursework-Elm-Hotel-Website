@@ -14,9 +14,9 @@ var _user$project$Models$Country = F3(
 	function (a, b, c) {
 		return {id: a, name: b, nameLocativeCase: c};
 	});
-var _user$project$Models$Hotel = F7(
-	function (a, b, c, d, e, f, g) {
-		return {id: a, name: b, popularity: c, countryId: d, bgPhotoUrl: e, photoUrls: f, rooms: g};
+var _user$project$Models$Hotel = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {id: a, name: b, popularity: c, countryId: d, stars: e, bgPhotoUrl: f, photoUrls: g, rooms: h};
 	});
 var _user$project$Models$Room = F4(
 	function (a, b, c, d) {
@@ -25,6 +25,10 @@ var _user$project$Models$Room = F4(
 var _user$project$Models$PriceOption = F2(
 	function (a, b) {
 		return {optionName: a, price: b};
+	});
+var _user$project$Models$SortOptionSelect = F2(
+	function (a, b) {
+		return {ctor: 'SortOptionSelect', _0: a, _1: b};
 	});
 var _user$project$Models$NavIconClick = function (a) {
 	return {ctor: 'NavIconClick', _0: a};

@@ -7884,9 +7884,9 @@ var _user$project$Models$Country = F3(
 	function (a, b, c) {
 		return {id: a, name: b, nameLocativeCase: c};
 	});
-var _user$project$Models$Hotel = F7(
-	function (a, b, c, d, e, f, g) {
-		return {id: a, name: b, popularity: c, countryId: d, bgPhotoUrl: e, photoUrls: f, rooms: g};
+var _user$project$Models$Hotel = F8(
+	function (a, b, c, d, e, f, g, h) {
+		return {id: a, name: b, popularity: c, countryId: d, stars: e, bgPhotoUrl: f, photoUrls: g, rooms: h};
 	});
 var _user$project$Models$Room = F4(
 	function (a, b, c, d) {
@@ -7896,6 +7896,10 @@ var _user$project$Models$PriceOption = F2(
 	function (a, b) {
 		return {optionName: a, price: b};
 	});
+var _user$project$Models$SortOptionSelect = F2(
+	function (a, b) {
+		return {ctor: 'SortOptionSelect', _0: a, _1: b};
+	});
 var _user$project$Models$NavIconClick = function (a) {
 	return {ctor: 'NavIconClick', _0: a};
 };
@@ -7904,9 +7908,25 @@ var _user$project$Models$Stars = {ctor: 'Stars'};
 var _user$project$Models$Popularity = {ctor: 'Popularity'};
 var _user$project$Models$Desc = {ctor: 'Desc'};
 var _user$project$Models$Asc = {ctor: 'Asc'};
+var _user$project$ModelUtils$negateSortOrder = function (ord) {
+	var _p0 = ord;
+	if (_p0.ctor === 'Asc') {
+		return _user$project$Models$Desc;
+	} else {
+		return _user$project$Models$Asc;
+	}
+};
+var _user$project$ModelUtils$sortingOrderLabel = function (ord) {
+	var _p1 = ord;
+	if (_p1.ctor === 'Asc') {
+		return '▲';
+	} else {
+		return '▼';
+	}
+};
 var _user$project$ModelUtils$sortingOptionLabel = function (opt) {
-	var _p0 = opt;
-	switch (_p0.ctor) {
+	var _p2 = opt;
+	switch (_p2.ctor) {
 		case 'Popularity':
 			return 'Популярністю';
 		case 'Stars':
@@ -7916,7 +7936,39 @@ var _user$project$ModelUtils$sortingOptionLabel = function (opt) {
 	}
 };
 var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
-	return A2(_elm_lang$core$List$take, 4, model.appContent.hotels);
+	return A2(
+		_elm_lang$core$List$take,
+		4,
+		function (_p3) {
+			return function () {
+				var _p4 = model.appState.currentSortOrder;
+				if (_p4.ctor === 'Asc') {
+					return _elm_lang$core$Basics$identity;
+				} else {
+					return _elm_lang$core$List$reverse;
+				}
+			}()(
+				function () {
+					var _p5 = model.appState.currentSortOption;
+					switch (_p5.ctor) {
+						case 'Popularity':
+							return _elm_lang$core$List$sortBy(
+								function (_) {
+									return _.popularity;
+								});
+						case 'Stars':
+							return _elm_lang$core$List$sortBy(
+								function (_) {
+									return _.stars;
+								});
+						default:
+							return _elm_lang$core$List$sortBy(
+								function (_) {
+									return _.popularity;
+								});
+					}
+				}()(_p3));
+		}(model.appContent.hotels));
 };
 var _user$project$RightBlock$renderRightBlockReviews = function (appState) {
 	return A2(
@@ -8159,15 +8211,66 @@ var _user$project$MainContent$renderPageItem = function (hotel) {
 							]),
 						_elm_lang$core$Native_List.fromArray(
 							[
-								_elm_lang$html$Html$text(hotel.name)
+								A2(
+								_elm_lang$html$Html$div,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class(
+										A2(
+											_elm_lang$core$Basics_ops['++'],
+											'stars-',
+											_elm_lang$core$Basics$toString(hotel.stars)))
+									]),
+								A2(
+									_elm_lang$core$List$repeat,
+									hotel.stars,
+									A2(
+										_elm_lang$html$Html$div,
+										_elm_lang$core$Native_List.fromArray(
+											[
+												_elm_lang$html$Html_Attributes$class('star')
+											]),
+										_elm_lang$core$Native_List.fromArray(
+											[])))),
+								A2(
+								_elm_lang$html$Html$h5,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(hotel.name)
+									]))
 							]))
 					]))
 			]));
 };
 var _user$project$MainContent$renderSortOption = F2(
 	function (model, option) {
-		return _elm_lang$html$Html$text(
-			_user$project$ModelUtils$sortingOptionLabel(option));
+		var currentOrd = model.appState.currentSortOrder;
+		var isSelected = _elm_lang$core$Native_Utils.eq(option, model.appState.currentSortOption);
+		return A2(
+			_elm_lang$html$Html$a,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$href('#'),
+					_elm_lang$html$Html_Attributes$classList(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: 'selected', _1: isSelected}
+						])),
+					_elm_lang$html$Html_Events$onClick(
+					A2(
+						_user$project$Models$SortOptionSelect,
+						option,
+						isSelected ? _user$project$ModelUtils$negateSortOrder(currentOrd) : _user$project$Models$Desc))
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(
+					_user$project$ModelUtils$sortingOptionLabel(option)),
+					_elm_lang$html$Html$text(
+					isSelected ? _user$project$ModelUtils$sortingOrderLabel(currentOrd) : '')
+				]));
 	});
 var _user$project$MainContent$renderPageSortOptions = function (model) {
 	return A2(
@@ -8294,14 +8397,25 @@ var _user$project$ContentLayout$renderLayout = F2(
 var _user$project$Main$update = F2(
 	function (msg, model) {
 		var _p0 = msg;
-		var appState = model.appState;
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{
-				appState: _elm_lang$core$Native_Utils.update(
-					appState,
-					{selectedNavIcon: _p0._0})
-			});
+		if (_p0.ctor === 'NavIconClick') {
+			var appState = model.appState;
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					appState: _elm_lang$core$Native_Utils.update(
+						appState,
+						{selectedNavIcon: _p0._0})
+				});
+		} else {
+			var appState = model.appState;
+			return _elm_lang$core$Native_Utils.update(
+				model,
+				{
+					appState: _elm_lang$core$Native_Utils.update(
+						appState,
+						{currentSortOption: _p0._0, currentSortOrder: _p0._1})
+				});
+		}
 	});
 var _user$project$Main$view = function (model) {
 	return A2(
@@ -8322,7 +8436,7 @@ var _user$project$Main$main = {
 	main: _elm_lang$html$Html_App$beginnerProgram(
 		{
 			model: {
-				appState: {selectedNavIcon: 'icon-navigation', currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Asc, currentPage: 1},
+				appState: {selectedNavIcon: 'icon-navigation', currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Desc, currentPage: 1},
 				appContent: {
 					countries: _elm_lang$core$Native_List.fromArray(
 						[
@@ -8338,6 +8452,7 @@ var _user$project$Main$main = {
 							name: 'Cassandra Mare',
 							popularity: 1,
 							countryId: 'malta',
+							stars: 5,
 							bgPhotoUrl: 'bg_1.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),
@@ -8349,6 +8464,7 @@ var _user$project$Main$main = {
 							name: 'Akrathos Hotel',
 							popularity: 2,
 							countryId: 'ibiza',
+							stars: 4,
 							bgPhotoUrl: 'bg_2.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),
@@ -8360,6 +8476,7 @@ var _user$project$Main$main = {
 							name: 'Alara Hotel',
 							popularity: 3,
 							countryId: 'cyprus',
+							stars: 3,
 							bgPhotoUrl: 'bg_3.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),
@@ -8371,6 +8488,7 @@ var _user$project$Main$main = {
 							name: 'Boumerang',
 							popularity: 4,
 							countryId: 'crit',
+							stars: 4,
 							bgPhotoUrl: 'bg_4.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),

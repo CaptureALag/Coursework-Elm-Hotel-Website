@@ -6,13 +6,15 @@ import Dict exposing (Dict)
 import ContentLayout exposing (renderLayout)
 import Models exposing (..)
 
+import Debug
+
 main =
   beginnerProgram { model = 
     { appState =
         { selectedNavIcon = 
             "icon-navigation"
         , currentSortOption = Popularity
-        , currentSortOrder = Asc
+        , currentSortOrder = Desc
         , currentPage = 1
         }
     , appContent =         
@@ -40,6 +42,7 @@ main =
               , name = "Cassandra Mare"
               , popularity = 1
               , countryId = "malta"
+              , stars = 5
               , bgPhotoUrl = "bg_1.jpg"
               , photoUrls = []
               , rooms = []    
@@ -48,6 +51,7 @@ main =
               , name = "Akrathos Hotel"
               , popularity = 2
               , countryId = "ibiza"
+              , stars = 4
               , bgPhotoUrl = "bg_2.jpg"
               , photoUrls = []
               , rooms = []    
@@ -56,6 +60,7 @@ main =
               , name = "Alara Hotel"
               , popularity = 3
               , countryId = "cyprus"
+              , stars = 3
               , bgPhotoUrl = "bg_3.jpg"
               , photoUrls = []
               , rooms = []    
@@ -64,6 +69,7 @@ main =
               , name = "Boumerang"
               , popularity = 4
               , countryId = "crit"
+              , stars = 4
               , bgPhotoUrl = "bg_4.jpg"
               , photoUrls = []
               , rooms = []    
@@ -94,3 +100,6 @@ update msg model =
     (Models.NavIconClick iconClass) ->
       let appState = model.appState
       in { model | appState = { appState | selectedNavIcon = iconClass } }
+    (SortOptionSelect opt ord) ->
+      let appState = model.appState
+      in {model | appState = { appState | currentSortOption = opt , currentSortOrder = ord}}
