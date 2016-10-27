@@ -37,6 +37,19 @@
 				}
 			}
 		}
+
+		@media screen and (max-width: 1140px) {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+			& > label {
+				width: unset;
+				margin-right: unset;
+				text-align: center;
+				margin-bottom: 10px;
+			}
+		}
 	}
 
 	& > figure.page-item {
@@ -45,6 +58,19 @@
 
 		margin: 0;
 		height: 300px;
+
+		filter: brightness(90%);
+		-webkit-filter: brightness(90%);
+
+		transition: filter 0.3s, -webkit-filter 0.3s;
+
+		&:hover {
+			filter: brightness(910%);
+			-webkit-filter: brightness(100%);		
+		}
+
+		cursor: pointer;
+
 
 		& > img {
 
