@@ -13,9 +13,13 @@ main =
     { appState =
         { selectedNavIcon = 
             "icon-navigation"
+
+        , currentRoute = MenuPage
+
         , currentSortOption = Popularity
         , currentSortOrder = Desc
         , currentPage = 1
+        , currentFilterByCountry = Nothing
         }
     , appContent =         
         { countries = 
@@ -94,12 +98,22 @@ view model =
   div []
     [(renderLayout (\x -> text "") model)]
 
+updateAppState : (AppState -> AppState) -> Model -> Model
+updateAppState f model =
+  let appState = model.appState
+  in {model | appState = f appState}
+
+
 update : Msg -> Model -> Model
-update msg model =
+update msg =
   case msg of
     (Models.NavIconClick iconClass) ->
-      let appState = model.appState
-      in { model | appState = { appState | selectedNavIcon = iconClass } }
+      updateAppState (\st -> { st | selectedNavIcon = iconClass } )
     (SortOptionSelect opt ord) ->
-      let appState = model.appState
-      in {model | appState = { appState | currentSortOption = opt , currentSortOrder = ord}}
+      updateAppState (\st -> { st | currentSortOption = opt , currentSortOrder = ord})
+    (RouteChange route) ->
+      updateAppState (\st -> { st | currentRoute = route})
+    LogoClick ->
+      updateAppState (\st -> { st | currentRoute = MenuPage })
+    SetFilterByCountry country ->
+      updateAppState (\st -> { st | currentFilterByCountry = country})

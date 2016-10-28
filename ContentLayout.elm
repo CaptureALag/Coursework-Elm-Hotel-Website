@@ -3,7 +3,7 @@ module ContentLayout exposing (..)
 import Html exposing(Html, node, header, div, a, nav, form, text, input, h4, button)
 import Html.Attributes exposing(href, class, classList, rel, type', name, placeholder, value, style, src)
 import Html.Events exposing (onClick)
-import Models exposing (Model, AppState, AppContent, Msg)
+import Models exposing (..)
 import List exposing (append)
 
 import RightBlock exposing(renderRightBlock)
@@ -16,7 +16,6 @@ renderLayout renderContent model =
      ::renderHeader
      ::(renderRightBlock model)
      ::(renderMainContent model)
-     ::(div [class "kek2"] [])
      ::[])
  
 renderMetadata : Html Msg
@@ -29,5 +28,6 @@ renderMetadata =
 renderHeader : Html Msg
 renderHeader =
    header [] [
-     div [class "logo"] []        
+     div [class "logo", onClick LogoClick] []        
+     
    ]

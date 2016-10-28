@@ -104,36 +104,73 @@ var _user$project$RightBlock$renderRightBlockNavigation = F2(
 						]))
 				]),
 			A2(
-				_elm_lang$core$List$append,
+				_elm_lang$core$List_ops['::'],
 				A2(
-					_elm_lang$core$List$map,
-					function (cntry) {
-						return A2(
+					_elm_lang$html$Html$a,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('link-country'),
+							_elm_lang$html$Html_Events$onClick(
+							_user$project$Models$SetFilterByCountry(_elm_lang$core$Maybe$Nothing)),
+							_elm_lang$html$Html_Attributes$classList(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									{
+									ctor: '_Tuple2',
+									_0: 'selected',
+									_1: _elm_lang$core$Native_Utils.eq(appState.currentFilterByCountry, _elm_lang$core$Maybe$Nothing)
+								}
+								]))
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('Всі тури')
+						])),
+				A2(
+					_elm_lang$core$List$append,
+					A2(
+						_elm_lang$core$List$map,
+						function (cntry) {
+							return A2(
+								_elm_lang$html$Html$a,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('link-country'),
+										_elm_lang$html$Html_Events$onClick(
+										_user$project$Models$SetFilterByCountry(
+											_elm_lang$core$Maybe$Just(cntry))),
+										_elm_lang$html$Html_Attributes$classList(
+										_elm_lang$core$Native_List.fromArray(
+											[
+												{
+												ctor: '_Tuple2',
+												_0: 'selected',
+												_1: _elm_lang$core$Native_Utils.eq(
+													_elm_lang$core$Maybe$Just(cntry),
+													appState.currentFilterByCountry)
+											}
+											]))
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(
+										A2(_elm_lang$core$Basics_ops['++'], 'Тури на ', cntry.nameLocativeCase))
+									]));
+						},
+						appContent.countries),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
 							_elm_lang$html$Html$a,
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html_Attributes$class('link-country')
+									_elm_lang$html$Html_Attributes$class('link-contacts')
 								]),
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html$text(
-									A2(_elm_lang$core$Basics_ops['++'], 'Тури на ', cntry.nameLocativeCase))
-								]));
-					},
-					appContent.countries),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html$a,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('link-contacts')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Контакти')
-							]))
-					])));
+									_elm_lang$html$Html$text('Контакти')
+								]))
+						]))));
 	});
 var _user$project$RightBlock$renderTopMostNavIcons = function (appState) {
 	return A2(

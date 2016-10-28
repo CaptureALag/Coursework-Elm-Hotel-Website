@@ -40,10 +40,23 @@ button {
             transition: filter 0.3s, -webkit-filter 0.3s, opacity 0.3s;
 
             opacity: 0.3;
+
+            /*&.selected {
+                content: "";
+                width: 0;
+                height: 0;
+                border-style: solid;
+                border-width: 0 100px 200px 100px;
+                border-color: transparent transparent #007bff transparent;
+            }*/
             
             &.icon-navigation {
                 -webkit-filter: brightness(50%);
                 filter: brightness(50%);
+
+                &.selected::after {
+                    border-color: blue;
+                }
             }
             
             &.icon-reviews {
@@ -89,7 +102,7 @@ button {
             opacity: 0.6;
             transition: opacity 0.2s;
             
-            &:hover {
+            &.selected, &:hover {
                 opacity: 1;
             }
         }

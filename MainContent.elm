@@ -9,12 +9,24 @@ import Html.Events exposing(onClick)
 
 renderMainContent : Model -> Html Msg
 renderMainContent model =
-   renderCurrentPage model
+   div [class "main-content"]
+     [
+       case model.appState.currentRoute of
+          MenuPage -> renderMenuPage model
+          HotelPage hotel -> renderHotelPage model hotel
+     ]
+
+renderMenuPage : Model -> Html Msg
+renderMenuPage model =
+   div [class "menu-page"] ((renderPageSortOptions model)::( List.map renderMenuPageItem (getHotelsOnCurrentPage model) ))
 
 
-renderCurrentPage : Model -> Html Msg
-renderCurrentPage model =
-   div [class "current-page"] ((renderPageSortOptions model)::( List.map renderPageItem (getHotelsOnCurrentPage model) ))
+renderHotelPage : Model -> Hotel -> Html Msg
+renderHotelPage model hotel =
+   div [class "hotel-page"]
+      [ renderMenuPageItem hotel
+               
+      ]
 
 
 renderPageSortOptions : Model -> Html Msg
@@ -35,9 +47,9 @@ renderSortOption model option =
               , onClick (SortOptionSelect option (if isSelected then (negateSortOrder currentOrd) else Desc))] 
               [text (sortingOptionLabel option), text (if isSelected then sortingOrderLabel (currentOrd) else "")]
 
-renderPageItem : Hotel -> Html Msg
-renderPageItem hotel =
-   figure [class "page-item"] 
+renderMenuPageItem : Hotel -> Html Msg
+renderMenuPageItem hotel =
+   figure [class "menu-item", onClick (RouteChange (HotelPage hotel))] 
      [ img [src ("img/" ++ hotel.bgPhotoUrl)] []
      , figcaption [] 
          [ div [class "country-name"]

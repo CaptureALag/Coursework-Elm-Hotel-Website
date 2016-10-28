@@ -29,34 +29,45 @@ var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
 	return A2(
 		_elm_lang$core$List$take,
 		4,
-		function (_p3) {
-			return function () {
-				var _p4 = model.appState.currentSortOrder;
-				if (_p4.ctor === 'Asc') {
-					return _elm_lang$core$Basics$identity;
-				} else {
-					return _elm_lang$core$List$reverse;
-				}
-			}()(
-				function () {
-					var _p5 = model.appState.currentSortOption;
-					switch (_p5.ctor) {
-						case 'Popularity':
-							return _elm_lang$core$List$sortBy(
-								function (_) {
-									return _.popularity;
-								});
-						case 'Stars':
-							return _elm_lang$core$List$sortBy(
-								function (_) {
-									return _.stars;
-								});
-						default:
-							return _elm_lang$core$List$sortBy(
-								function (_) {
-									return _.popularity;
-								});
+		function () {
+			var _p3 = model.appState.currentFilterByCountry;
+			if (_p3.ctor === 'Just') {
+				return _elm_lang$core$List$filter(
+					function (hotel) {
+						return _elm_lang$core$Native_Utils.eq(hotel.countryId, _p3._0.id);
+					});
+			} else {
+				return _elm_lang$core$Basics$identity;
+			}
+		}()(
+			function (_p4) {
+				return function () {
+					var _p5 = model.appState.currentSortOrder;
+					if (_p5.ctor === 'Asc') {
+						return _elm_lang$core$Basics$identity;
+					} else {
+						return _elm_lang$core$List$reverse;
 					}
-				}()(_p3));
-		}(model.appContent.hotels));
+				}()(
+					function () {
+						var _p6 = model.appState.currentSortOption;
+						switch (_p6.ctor) {
+							case 'Popularity':
+								return _elm_lang$core$List$sortBy(
+									function (_) {
+										return _.popularity;
+									});
+							case 'Stars':
+								return _elm_lang$core$List$sortBy(
+									function (_) {
+										return _.stars;
+									});
+							default:
+								return _elm_lang$core$List$sortBy(
+									function (_) {
+										return _.popularity;
+									});
+						}
+					}()(_p4));
+			}(model.appContent.hotels)));
 };

@@ -6,6 +6,9 @@ import Dict exposing (Dict)
 type Msg = 
     NavIconClick String 
   | SortOptionSelect SortOption SortOrder
+  | RouteChange Route
+  | LogoClick
+  | SetFilterByCountry (Maybe Country)
 
 type alias Model =
     { appState : AppState
@@ -16,11 +19,16 @@ type alias Model =
 type alias AppState =
     { selectedNavIcon : String
 
+    , currentRoute : Route
+
     , currentSortOption : SortOption
     , currentSortOrder : SortOrder
     , currentPage : Int
+    , currentFilterByCountry : Maybe Country
+
     }
 
+type Route = MenuPage | HotelPage Hotel
 type SortOption = Popularity | Stars | Price
 type SortOrder = Asc | Desc
 

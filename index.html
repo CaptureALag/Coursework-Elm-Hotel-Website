@@ -7872,9 +7872,9 @@ var _user$project$Models$Model = F2(
 	function (a, b) {
 		return {appState: a, appContent: b};
 	});
-var _user$project$Models$AppState = F4(
-	function (a, b, c, d) {
-		return {selectedNavIcon: a, currentSortOption: b, currentSortOrder: c, currentPage: d};
+var _user$project$Models$AppState = F6(
+	function (a, b, c, d, e, f) {
+		return {selectedNavIcon: a, currentRoute: b, currentSortOption: c, currentSortOrder: d, currentPage: e, currentFilterByCountry: f};
 	});
 var _user$project$Models$AppContent = F2(
 	function (a, b) {
@@ -7896,6 +7896,13 @@ var _user$project$Models$PriceOption = F2(
 	function (a, b) {
 		return {optionName: a, price: b};
 	});
+var _user$project$Models$SetFilterByCountry = function (a) {
+	return {ctor: 'SetFilterByCountry', _0: a};
+};
+var _user$project$Models$LogoClick = {ctor: 'LogoClick'};
+var _user$project$Models$RouteChange = function (a) {
+	return {ctor: 'RouteChange', _0: a};
+};
 var _user$project$Models$SortOptionSelect = F2(
 	function (a, b) {
 		return {ctor: 'SortOptionSelect', _0: a, _1: b};
@@ -7903,6 +7910,10 @@ var _user$project$Models$SortOptionSelect = F2(
 var _user$project$Models$NavIconClick = function (a) {
 	return {ctor: 'NavIconClick', _0: a};
 };
+var _user$project$Models$HotelPage = function (a) {
+	return {ctor: 'HotelPage', _0: a};
+};
+var _user$project$Models$MenuPage = {ctor: 'MenuPage'};
 var _user$project$Models$Price = {ctor: 'Price'};
 var _user$project$Models$Stars = {ctor: 'Stars'};
 var _user$project$Models$Popularity = {ctor: 'Popularity'};
@@ -7939,36 +7950,47 @@ var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
 	return A2(
 		_elm_lang$core$List$take,
 		4,
-		function (_p3) {
-			return function () {
-				var _p4 = model.appState.currentSortOrder;
-				if (_p4.ctor === 'Asc') {
-					return _elm_lang$core$Basics$identity;
-				} else {
-					return _elm_lang$core$List$reverse;
-				}
-			}()(
-				function () {
-					var _p5 = model.appState.currentSortOption;
-					switch (_p5.ctor) {
-						case 'Popularity':
-							return _elm_lang$core$List$sortBy(
-								function (_) {
-									return _.popularity;
-								});
-						case 'Stars':
-							return _elm_lang$core$List$sortBy(
-								function (_) {
-									return _.stars;
-								});
-						default:
-							return _elm_lang$core$List$sortBy(
-								function (_) {
-									return _.popularity;
-								});
+		function () {
+			var _p3 = model.appState.currentFilterByCountry;
+			if (_p3.ctor === 'Just') {
+				return _elm_lang$core$List$filter(
+					function (hotel) {
+						return _elm_lang$core$Native_Utils.eq(hotel.countryId, _p3._0.id);
+					});
+			} else {
+				return _elm_lang$core$Basics$identity;
+			}
+		}()(
+			function (_p4) {
+				return function () {
+					var _p5 = model.appState.currentSortOrder;
+					if (_p5.ctor === 'Asc') {
+						return _elm_lang$core$Basics$identity;
+					} else {
+						return _elm_lang$core$List$reverse;
 					}
-				}()(_p3));
-		}(model.appContent.hotels));
+				}()(
+					function () {
+						var _p6 = model.appState.currentSortOption;
+						switch (_p6.ctor) {
+							case 'Popularity':
+								return _elm_lang$core$List$sortBy(
+									function (_) {
+										return _.popularity;
+									});
+							case 'Stars':
+								return _elm_lang$core$List$sortBy(
+									function (_) {
+										return _.stars;
+									});
+							default:
+								return _elm_lang$core$List$sortBy(
+									function (_) {
+										return _.popularity;
+									});
+						}
+					}()(_p4));
+			}(model.appContent.hotels)));
 };
 var _user$project$RightBlock$renderRightBlockReviews = function (appState) {
 	return A2(
@@ -8076,36 +8098,73 @@ var _user$project$RightBlock$renderRightBlockNavigation = F2(
 						]))
 				]),
 			A2(
-				_elm_lang$core$List$append,
+				_elm_lang$core$List_ops['::'],
 				A2(
-					_elm_lang$core$List$map,
-					function (cntry) {
-						return A2(
+					_elm_lang$html$Html$a,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('link-country'),
+							_elm_lang$html$Html_Events$onClick(
+							_user$project$Models$SetFilterByCountry(_elm_lang$core$Maybe$Nothing)),
+							_elm_lang$html$Html_Attributes$classList(
+							_elm_lang$core$Native_List.fromArray(
+								[
+									{
+									ctor: '_Tuple2',
+									_0: 'selected',
+									_1: _elm_lang$core$Native_Utils.eq(appState.currentFilterByCountry, _elm_lang$core$Maybe$Nothing)
+								}
+								]))
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('Всі тури')
+						])),
+				A2(
+					_elm_lang$core$List$append,
+					A2(
+						_elm_lang$core$List$map,
+						function (cntry) {
+							return A2(
+								_elm_lang$html$Html$a,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('link-country'),
+										_elm_lang$html$Html_Events$onClick(
+										_user$project$Models$SetFilterByCountry(
+											_elm_lang$core$Maybe$Just(cntry))),
+										_elm_lang$html$Html_Attributes$classList(
+										_elm_lang$core$Native_List.fromArray(
+											[
+												{
+												ctor: '_Tuple2',
+												_0: 'selected',
+												_1: _elm_lang$core$Native_Utils.eq(
+													_elm_lang$core$Maybe$Just(cntry),
+													appState.currentFilterByCountry)
+											}
+											]))
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(
+										A2(_elm_lang$core$Basics_ops['++'], 'Тури на ', cntry.nameLocativeCase))
+									]));
+						},
+						appContent.countries),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
 							_elm_lang$html$Html$a,
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html_Attributes$class('link-country')
+									_elm_lang$html$Html_Attributes$class('link-contacts')
 								]),
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html$text(
-									A2(_elm_lang$core$Basics_ops['++'], 'Тури на ', cntry.nameLocativeCase))
-								]));
-					},
-					appContent.countries),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						A2(
-						_elm_lang$html$Html$a,
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html_Attributes$class('link-contacts')
-							]),
-						_elm_lang$core$Native_List.fromArray(
-							[
-								_elm_lang$html$Html$text('Контакти')
-							]))
-					])));
+									_elm_lang$html$Html$text('Контакти')
+								]))
+						]))));
 	});
 var _user$project$RightBlock$renderTopMostNavIcons = function (appState) {
 	return A2(
@@ -8169,12 +8228,15 @@ var _user$project$RightBlock$renderRightBlock = function (model) {
 				_user$project$RightBlock$renderRightBlockReviews(model.appState)
 			]));
 };
-var _user$project$MainContent$renderPageItem = function (hotel) {
+var _user$project$MainContent$renderMenuPageItem = function (hotel) {
 	return A2(
 		_elm_lang$html$Html$figure,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('page-item')
+				_elm_lang$html$Html_Attributes$class('menu-item'),
+				_elm_lang$html$Html_Events$onClick(
+				_user$project$Models$RouteChange(
+					_user$project$Models$HotelPage(hotel)))
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -8302,23 +8364,52 @@ var _user$project$MainContent$renderPageSortOptions = function (model) {
 						[_user$project$Models$Popularity, _user$project$Models$Stars, _user$project$Models$Price])))
 			]));
 };
-var _user$project$MainContent$renderCurrentPage = function (model) {
+var _user$project$MainContent$renderHotelPage = F2(
+	function (model, hotel) {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('hotel-page')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_user$project$MainContent$renderMenuPageItem(hotel)
+				]));
+	});
+var _user$project$MainContent$renderMenuPage = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('current-page')
+				_elm_lang$html$Html_Attributes$class('menu-page')
 			]),
 		A2(
 			_elm_lang$core$List_ops['::'],
 			_user$project$MainContent$renderPageSortOptions(model),
 			A2(
 				_elm_lang$core$List$map,
-				_user$project$MainContent$renderPageItem,
+				_user$project$MainContent$renderMenuPageItem,
 				_user$project$ModelUtils$getHotelsOnCurrentPage(model))));
 };
 var _user$project$MainContent$renderMainContent = function (model) {
-	return _user$project$MainContent$renderCurrentPage(model);
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('main-content')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				function () {
+				var _p0 = model.appState.currentRoute;
+				if (_p0.ctor === 'MenuPage') {
+					return _user$project$MainContent$renderMenuPage(model);
+				} else {
+					return A2(_user$project$MainContent$renderHotelPage, model, _p0._0);
+				}
+			}()
+			]));
 };
 var _user$project$ContentLayout$renderHeader = A2(
 	_elm_lang$html$Html$header,
@@ -8330,7 +8421,8 @@ var _user$project$ContentLayout$renderHeader = A2(
 			_elm_lang$html$Html$div,
 			_elm_lang$core$Native_List.fromArray(
 				[
-					_elm_lang$html$Html_Attributes$class('logo')
+					_elm_lang$html$Html_Attributes$class('logo'),
+					_elm_lang$html$Html_Events$onClick(_user$project$Models$LogoClick)
 				]),
 			_elm_lang$core$Native_List.fromArray(
 				[]))
@@ -8381,42 +8473,58 @@ var _user$project$ContentLayout$renderLayout = F2(
 						A2(
 							_elm_lang$core$List_ops['::'],
 							_user$project$MainContent$renderMainContent(model),
-							A2(
-								_elm_lang$core$List_ops['::'],
-								A2(
-									_elm_lang$html$Html$div,
-									_elm_lang$core$Native_List.fromArray(
-										[
-											_elm_lang$html$Html_Attributes$class('kek2')
-										]),
-									_elm_lang$core$Native_List.fromArray(
-										[])),
-								_elm_lang$core$Native_List.fromArray(
-									[])))))));
+							_elm_lang$core$Native_List.fromArray(
+								[]))))));
 	});
-var _user$project$Main$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		if (_p0.ctor === 'NavIconClick') {
-			var appState = model.appState;
-			return _elm_lang$core$Native_Utils.update(
-				model,
-				{
-					appState: _elm_lang$core$Native_Utils.update(
-						appState,
-						{selectedNavIcon: _p0._0})
-				});
-		} else {
-			var appState = model.appState;
-			return _elm_lang$core$Native_Utils.update(
-				model,
-				{
-					appState: _elm_lang$core$Native_Utils.update(
-						appState,
-						{currentSortOption: _p0._0, currentSortOrder: _p0._1})
-				});
-		}
+var _user$project$Main$updateAppState = F2(
+	function (f, model) {
+		var appState = model.appState;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				appState: f(appState)
+			});
 	});
+var _user$project$Main$update = function (msg) {
+	var _p0 = msg;
+	switch (_p0.ctor) {
+		case 'NavIconClick':
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{selectedNavIcon: _p0._0});
+				});
+		case 'SortOptionSelect':
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{currentSortOption: _p0._0, currentSortOrder: _p0._1});
+				});
+		case 'RouteChange':
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{currentRoute: _p0._0});
+				});
+		case 'LogoClick':
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{currentRoute: _user$project$Models$MenuPage});
+				});
+		default:
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{currentFilterByCountry: _p0._0});
+				});
+	}
+};
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -8436,7 +8544,7 @@ var _user$project$Main$main = {
 	main: _elm_lang$html$Html_App$beginnerProgram(
 		{
 			model: {
-				appState: {selectedNavIcon: 'icon-navigation', currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Desc, currentPage: 1},
+				appState: {selectedNavIcon: 'icon-navigation', currentRoute: _user$project$Models$MenuPage, currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Desc, currentPage: 1, currentFilterByCountry: _elm_lang$core$Maybe$Nothing},
 				appContent: {
 					countries: _elm_lang$core$Native_List.fromArray(
 						[

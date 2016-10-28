@@ -1,9 +1,12 @@
-var _user$project$MainContent$renderPageItem = function (hotel) {
+var _user$project$MainContent$renderMenuPageItem = function (hotel) {
 	return A2(
 		_elm_lang$html$Html$figure,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('page-item')
+				_elm_lang$html$Html_Attributes$class('menu-item'),
+				_elm_lang$html$Html_Events$onClick(
+				_user$project$Models$RouteChange(
+					_user$project$Models$HotelPage(hotel)))
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
@@ -131,21 +134,50 @@ var _user$project$MainContent$renderPageSortOptions = function (model) {
 						[_user$project$Models$Popularity, _user$project$Models$Stars, _user$project$Models$Price])))
 			]));
 };
-var _user$project$MainContent$renderCurrentPage = function (model) {
+var _user$project$MainContent$renderHotelPage = F2(
+	function (model, hotel) {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('hotel-page')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_user$project$MainContent$renderMenuPageItem(hotel)
+				]));
+	});
+var _user$project$MainContent$renderMenuPage = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('current-page')
+				_elm_lang$html$Html_Attributes$class('menu-page')
 			]),
 		A2(
 			_elm_lang$core$List_ops['::'],
 			_user$project$MainContent$renderPageSortOptions(model),
 			A2(
 				_elm_lang$core$List$map,
-				_user$project$MainContent$renderPageItem,
+				_user$project$MainContent$renderMenuPageItem,
 				_user$project$ModelUtils$getHotelsOnCurrentPage(model))));
 };
 var _user$project$MainContent$renderMainContent = function (model) {
-	return _user$project$MainContent$renderCurrentPage(model);
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('main-content')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				function () {
+				var _p0 = model.appState.currentRoute;
+				if (_p0.ctor === 'MenuPage') {
+					return _user$project$MainContent$renderMenuPage(model);
+				} else {
+					return A2(_user$project$MainContent$renderHotelPage, model, _p0._0);
+				}
+			}()
+			]));
 };

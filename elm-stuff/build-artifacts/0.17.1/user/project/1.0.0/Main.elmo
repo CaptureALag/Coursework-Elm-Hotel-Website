@@ -1,26 +1,52 @@
-var _user$project$Main$update = F2(
-	function (msg, model) {
-		var _p0 = msg;
-		if (_p0.ctor === 'NavIconClick') {
-			var appState = model.appState;
-			return _elm_lang$core$Native_Utils.update(
-				model,
-				{
-					appState: _elm_lang$core$Native_Utils.update(
-						appState,
-						{selectedNavIcon: _p0._0})
-				});
-		} else {
-			var appState = model.appState;
-			return _elm_lang$core$Native_Utils.update(
-				model,
-				{
-					appState: _elm_lang$core$Native_Utils.update(
-						appState,
-						{currentSortOption: _p0._0, currentSortOrder: _p0._1})
-				});
-		}
+var _user$project$Main$updateAppState = F2(
+	function (f, model) {
+		var appState = model.appState;
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				appState: f(appState)
+			});
 	});
+var _user$project$Main$update = function (msg) {
+	var _p0 = msg;
+	switch (_p0.ctor) {
+		case 'NavIconClick':
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{selectedNavIcon: _p0._0});
+				});
+		case 'SortOptionSelect':
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{currentSortOption: _p0._0, currentSortOrder: _p0._1});
+				});
+		case 'RouteChange':
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{currentRoute: _p0._0});
+				});
+		case 'LogoClick':
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{currentRoute: _user$project$Models$MenuPage});
+				});
+		default:
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{currentFilterByCountry: _p0._0});
+				});
+	}
+};
 var _user$project$Main$view = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -40,7 +66,7 @@ var _user$project$Main$main = {
 	main: _elm_lang$html$Html_App$beginnerProgram(
 		{
 			model: {
-				appState: {selectedNavIcon: 'icon-navigation', currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Desc, currentPage: 1},
+				appState: {selectedNavIcon: 'icon-navigation', currentRoute: _user$project$Models$MenuPage, currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Desc, currentPage: 1, currentFilterByCountry: _elm_lang$core$Maybe$Nothing},
 				appContent: {
 					countries: _elm_lang$core$Native_List.fromArray(
 						[

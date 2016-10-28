@@ -5,6 +5,11 @@ import Models exposing(..)
 getHotelsOnCurrentPage : Model -> List Hotel
 getHotelsOnCurrentPage model =
    List.take 4
+    (
+     (case model.appState.currentFilterByCountry of
+        Just country -> List.filter(\hotel -> hotel.countryId == country.id)
+        Nothing -> identity)
+
     (((   case model.appState.currentSortOption of
              Popularity -> List.sortBy (.popularity)
              Stars -> List.sortBy (.stars)
@@ -13,7 +18,7 @@ getHotelsOnCurrentPage model =
              Asc -> identity
              Desc -> List.reverse
      )  
-        model.appContent.hotels)
+        model.appContent.hotels))
 
 sortingOptionLabel : SortOption -> String
 sortingOptionLabel opt =

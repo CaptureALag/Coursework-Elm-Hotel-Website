@@ -3,7 +3,7 @@ module RightBlock exposing (renderRightBlock)
 import Html exposing(Html, node, header, div, a, nav, form, text, input, h4, button)
 import Html.Attributes exposing(href, class, classList, rel, type', name, placeholder, value, style, src)
 import Html.Events exposing (onClick)
-import Models exposing (Model, AppState, AppContent, Msg)
+import Models exposing (..)
 import ModelUtils exposing(getHotelsOnCurrentPage)
 import List exposing (append)
    
@@ -34,12 +34,19 @@ renderTopMostNavIcons appState =
 
 renderRightBlockNavigation : AppState -> AppContent -> Html Msg
 renderRightBlockNavigation appState appContent = nav [classList[("hidden", appState.selectedNavIcon /= "icon-navigation")]]
-   ( append
-     ( List.map
-       (\cntry -> a [class "link-country"] [text ("Тури на " ++ cntry.nameLocativeCase)])
-       appContent.countries      
+   ( 
+     (a [class "link-country", onClick (SetFilterByCountry Nothing), classList [("selected", appState.currentFilterByCountry == Nothing)]][text "Всі тури"])::
+     (List.append
+       ( List.map (\cntry -> 
+          a 
+            [ class "link-country", 
+              onClick (SetFilterByCountry (Just cntry)),
+              classList [("selected", (Just cntry) == appState.currentFilterByCountry)]
+            ] [text ("Тури на " ++ cntry.nameLocativeCase)]
+        ) appContent.countries      
+       )
+       [a [class "link-contacts"] [text "Контакти"]]
      )
-     [a [class "link-contacts"] [text "Контакти"]]
    )
 
 renderRightBlockCallback : AppState -> Html Msg

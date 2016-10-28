@@ -2,9 +2,9 @@ var _user$project$Models$Model = F2(
 	function (a, b) {
 		return {appState: a, appContent: b};
 	});
-var _user$project$Models$AppState = F4(
-	function (a, b, c, d) {
-		return {selectedNavIcon: a, currentSortOption: b, currentSortOrder: c, currentPage: d};
+var _user$project$Models$AppState = F6(
+	function (a, b, c, d, e, f) {
+		return {selectedNavIcon: a, currentRoute: b, currentSortOption: c, currentSortOrder: d, currentPage: e, currentFilterByCountry: f};
 	});
 var _user$project$Models$AppContent = F2(
 	function (a, b) {
@@ -26,6 +26,13 @@ var _user$project$Models$PriceOption = F2(
 	function (a, b) {
 		return {optionName: a, price: b};
 	});
+var _user$project$Models$SetFilterByCountry = function (a) {
+	return {ctor: 'SetFilterByCountry', _0: a};
+};
+var _user$project$Models$LogoClick = {ctor: 'LogoClick'};
+var _user$project$Models$RouteChange = function (a) {
+	return {ctor: 'RouteChange', _0: a};
+};
 var _user$project$Models$SortOptionSelect = F2(
 	function (a, b) {
 		return {ctor: 'SortOptionSelect', _0: a, _1: b};
@@ -33,6 +40,10 @@ var _user$project$Models$SortOptionSelect = F2(
 var _user$project$Models$NavIconClick = function (a) {
 	return {ctor: 'NavIconClick', _0: a};
 };
+var _user$project$Models$HotelPage = function (a) {
+	return {ctor: 'HotelPage', _0: a};
+};
+var _user$project$Models$MenuPage = {ctor: 'MenuPage'};
 var _user$project$Models$Price = {ctor: 'Price'};
 var _user$project$Models$Stars = {ctor: 'Stars'};
 var _user$project$Models$Popularity = {ctor: 'Popularity'};
