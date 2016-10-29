@@ -18,16 +18,36 @@ renderMainContent model =
 
 renderMenuPage : Model -> Html Msg
 renderMenuPage model =
-   div [class "menu-page"] ((renderPageSortOptions model)::( List.map renderMenuPageItem (getHotelsOnCurrentPage model) ))
+   div [class "menu-page"] 
+      (
+         (renderHeadling model)::
+         ( List.map renderMenuPageItem (getHotelsOnCurrentPage model) )
+      )
 
 
 renderHotelPage : Model -> Hotel -> Html Msg
 renderHotelPage model hotel =
    div [class "hotel-page"]
-      [ renderMenuPageItem hotel
-               
+      [ renderHeadling model
+      , renderMenuPageItem hotel
       ]
 
+renderHeadling : Model -> Html Msg
+renderHeadling model = div [class "headling"] (
+   case model.appState.currentRoute of
+        MenuPage -> 
+           [
+               renderPageSortOptions model
+
+           ]
+        HotelPage hotel ->
+           [
+               renderBackButton
+           ]
+   )
+
+renderBackButton : Html Msg
+renderBackButton = a [class "back-button", href "#", onClick (RouteChange MenuPage)] [text "◄ До списку готелів"]    
 
 renderPageSortOptions : Model -> Html Msg
 renderPageSortOptions model =

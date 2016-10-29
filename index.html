@@ -8447,6 +8447,39 @@ var _user$project$MainContent$renderPageSortOptions = function (model) {
 						[_user$project$Models$Popularity, _user$project$Models$Stars, _user$project$Models$Price])))
 			]));
 };
+var _user$project$MainContent$renderBackButton = A2(
+	_elm_lang$html$Html$a,
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html_Attributes$class('back-button'),
+			_elm_lang$html$Html_Attributes$href('#'),
+			_elm_lang$html$Html_Events$onClick(
+			_user$project$Models$RouteChange(_user$project$Models$MenuPage))
+		]),
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html$text('◄ До списку готелів')
+		]));
+var _user$project$MainContent$renderHeadling = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('headling')
+			]),
+		function () {
+			var _p0 = model.appState.currentRoute;
+			if (_p0.ctor === 'MenuPage') {
+				return _elm_lang$core$Native_List.fromArray(
+					[
+						_user$project$MainContent$renderPageSortOptions(model)
+					]);
+			} else {
+				return _elm_lang$core$Native_List.fromArray(
+					[_user$project$MainContent$renderBackButton]);
+			}
+		}());
+};
 var _user$project$MainContent$renderHotelPage = F2(
 	function (model, hotel) {
 		return A2(
@@ -8457,6 +8490,7 @@ var _user$project$MainContent$renderHotelPage = F2(
 				]),
 			_elm_lang$core$Native_List.fromArray(
 				[
+					_user$project$MainContent$renderHeadling(model),
 					_user$project$MainContent$renderMenuPageItem(hotel)
 				]));
 	});
@@ -8469,7 +8503,7 @@ var _user$project$MainContent$renderMenuPage = function (model) {
 			]),
 		A2(
 			_elm_lang$core$List_ops['::'],
-			_user$project$MainContent$renderPageSortOptions(model),
+			_user$project$MainContent$renderHeadling(model),
 			A2(
 				_elm_lang$core$List$map,
 				_user$project$MainContent$renderMenuPageItem,
@@ -8485,11 +8519,11 @@ var _user$project$MainContent$renderMainContent = function (model) {
 		_elm_lang$core$Native_List.fromArray(
 			[
 				function () {
-				var _p0 = model.appState.currentRoute;
-				if (_p0.ctor === 'MenuPage') {
+				var _p1 = model.appState.currentRoute;
+				if (_p1.ctor === 'MenuPage') {
 					return _user$project$MainContent$renderMenuPage(model);
 				} else {
-					return A2(_user$project$MainContent$renderHotelPage, model, _p0._0);
+					return A2(_user$project$MainContent$renderHotelPage, model, _p1._0);
 				}
 			}()
 			]));
