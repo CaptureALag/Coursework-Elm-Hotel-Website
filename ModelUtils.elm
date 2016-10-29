@@ -13,7 +13,7 @@ getHotelsOnCurrentPage model =
     (((   case model.appState.currentSortOption of
              Popularity -> List.sortBy (.popularity)
              Stars -> List.sortBy (.stars)
-             Price -> List.sortBy (.popularity)
+             Price -> List.sortBy (getHotelMinPrice)
      ) >> case model.appState.currentSortOrder of
              Asc -> identity
              Desc -> List.reverse

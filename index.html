@@ -8028,10 +8028,7 @@ var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
 										return _.stars;
 									});
 							default:
-								return _elm_lang$core$List$sortBy(
-									function (_) {
-										return _.popularity;
-									});
+								return _elm_lang$core$List$sortBy(_user$project$ModelUtils$getHotelMinPrice);
 						}
 					}()(_p5));
 			}(model.appContent.hotels)));
