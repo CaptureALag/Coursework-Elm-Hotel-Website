@@ -75,7 +75,7 @@ var _user$project$MainContent$renderMenuPageItem = function (hotel) {
 										_elm_lang$html$Html$text(hotel.name)
 									])),
 								A2(
-								_elm_lang$html$Html$h3,
+								_elm_lang$html$Html$h6,
 								_elm_lang$core$Native_List.fromArray(
 									[
 										_elm_lang$html$Html_Attributes$class('duration')
@@ -86,7 +86,18 @@ var _user$project$MainContent$renderMenuPageItem = function (hotel) {
 										_user$project$ModelUtils$getHotelFormattedDuration(hotel))
 									])),
 								A2(
-								_elm_lang$html$Html$h3,
+								_elm_lang$html$Html$h6,
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html_Attributes$class('depart')
+									]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(
+										A2(_elm_lang$core$Basics_ops['++'], 'Відправлення: ', hotel.depart))
+									])),
+								A2(
+								_elm_lang$html$Html$h6,
 								_elm_lang$core$Native_List.fromArray(
 									[
 										_elm_lang$html$Html_Attributes$class('price-from')
@@ -96,12 +107,9 @@ var _user$project$MainContent$renderMenuPageItem = function (hotel) {
 										_elm_lang$html$Html$text(
 										A2(
 											_elm_lang$core$Basics_ops['++'],
-											'Ціна: від ',
-											A2(
-												_elm_lang$core$Basics_ops['++'],
-												_elm_lang$core$Basics$toString(
-													_user$project$ModelUtils$getHotelMinPrice(hotel)),
-												' грн:')))
+											'Ціна: від $',
+											_elm_lang$core$Basics$toString(
+												_user$project$ModelUtils$getHotelMinPrice(hotel))))
 									]))
 							]))
 					]))

@@ -63,8 +63,9 @@ renderMenuPageItem hotel =
                        List.repeat (hotel.stars) (div [class "star"] [])
                    )
              ,  h5 [class "name"] [ text hotel.name ]
-             ,  h3 [class "duration"] [ text (getHotelFormattedDuration hotel)]
-             ,  h3 [class "price-from"] [text ("Ціна: від " ++ (toString(getHotelMinPrice hotel)) ++ " грн")]
+             ,  h6 [class "duration"] [ text (getHotelFormattedDuration hotel)]
+             ,  h6 [class "depart"] [ text ("Відправлення: " ++ hotel.depart) ]
+             ,  h6 [class "price-from"] [text ("Ціна: від $" ++ (toString(getHotelMinPrice hotel)))]
              ]    
          ]
      ]

@@ -93,7 +93,8 @@ var _user$project$Main$main = {
 									{name: 'OB', personCapacity: 2, price: 600},
 									{name: 'ALL', personCapacity: 2, price: 1000}
 								]),
-							duration: 6
+							duration: 6,
+							depart: '14.08.2017'
 						},
 							{
 							id: 'akrathos-hotel',
@@ -111,7 +112,8 @@ var _user$project$Main$main = {
 									{name: 'OB', personCapacity: 2, price: 300},
 									{name: 'ALL', personCapacity: 2, price: 800}
 								]),
-							duration: 5
+							duration: 5,
+							depart: '18.08.2017'
 						},
 							{
 							id: 'alara-hotel',
@@ -129,7 +131,8 @@ var _user$project$Main$main = {
 									{name: 'OB', personCapacity: 2, price: 300},
 									{name: 'ALL', personCapacity: 2, price: 600}
 								]),
-							duration: 4
+							duration: 4,
+							depart: '24.08.2017'
 						},
 							{
 							id: 'boumerang',
@@ -147,7 +150,8 @@ var _user$project$Main$main = {
 									{name: 'OB', personCapacity: 2, price: 300},
 									{name: 'ALL', personCapacity: 2, price: 800}
 								]),
-							duration: 5
+							duration: 5,
+							depart: '21.08.2017'
 						}
 						])
 				}

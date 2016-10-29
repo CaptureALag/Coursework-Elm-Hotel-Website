@@ -68,7 +68,8 @@ main =
                     , price = 1000
                     }
                   ]   
-              ,   duration = 6
+              , duration = 6
+              , depart = "14.08.2017"
               },  
               { id = "akrathos-hotel"
               , name = "Akrathos Hotel"
@@ -96,7 +97,8 @@ main =
                     , price = 800
                     }
                   ]
-              ,   duration = 5    
+              , duration = 5    
+              , depart = "18.08.2017"
               },
               { id = "alara-hotel"
               , name = "Alara Hotel"
@@ -124,7 +126,8 @@ main =
                     , price = 600
                     }
                   ]  
-              ,   duration = 4
+              , duration = 4
+              , depart = "24.08.2017"
               },
               { id = "boumerang"
               , name = "Boumerang"
@@ -153,6 +156,7 @@ main =
                     }
                   ] 
             , duration = 5
+            , depart = "21.08.2017"
             }
             ]
         }
