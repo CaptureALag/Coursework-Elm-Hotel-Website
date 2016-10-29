@@ -1,6 +1,10 @@
 module ModelUtils exposing(..)
 
 import Models exposing(..)
+import String exposing(toInt)
+
+import Result exposing(toMaybe)
+import Maybe exposing (withDefault)
 
 getHotelsOnCurrentPage : Model -> List Hotel
 getHotelsOnCurrentPage model =
@@ -14,6 +18,11 @@ getHotelsOnCurrentPage model =
              Popularity -> List.sortBy (.popularity)
              Stars -> List.sortBy (.stars)
              Price -> List.sortBy (getHotelMinPrice)
+             Depart -> List.sortBy (\hotel ->
+                 case List.map ((withDefault -1) << toMaybe << toInt) (String.split "." hotel.depart) of
+                    [d,m,y] -> d + m*31 + y*31*366
+                    _ -> -1
+             )
      ) >> case model.appState.currentSortOrder of
              Asc -> identity
              Desc -> List.reverse
@@ -26,6 +35,7 @@ sortingOptionLabel opt =
       Popularity -> "Популярністю"
       Stars -> "Кількістю зірок"
       Price -> "Ціною"
+      Depart -> "Датою відправлення"
 
 sortingOrderLabel : SortOrder -> String
 sortingOrderLabel ord =

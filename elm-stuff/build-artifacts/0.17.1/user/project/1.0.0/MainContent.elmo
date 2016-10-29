@@ -170,7 +170,7 @@ var _user$project$MainContent$renderPageSortOptions = function (model) {
 					_elm_lang$core$List$map,
 					_user$project$MainContent$renderSortOption(model),
 					_elm_lang$core$Native_List.fromArray(
-						[_user$project$Models$Popularity, _user$project$Models$Stars, _user$project$Models$Price])))
+						[_user$project$Models$Popularity, _user$project$Models$Stars, _user$project$Models$Price, _user$project$Models$Depart])))
 			]));
 };
 var _user$project$MainContent$renderBackButton = A2(

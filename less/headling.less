@@ -19,11 +19,9 @@
 	& > .sort-options {
 		color: white;
 
-		& > * {
-			display: inline-block;
-		}
-
 		& > label {
+			display: inline-block;
+
 			width: 295px;
 			text-align: right;
 
@@ -33,6 +31,10 @@
 		}
 
 		& > .variants {
+			display: inline-flex;
+			flex-wrap: wrap;
+    		justify-content: center;
+
 			& > a {
 				color: white;
 				text-transform: lowercase;
@@ -47,7 +49,7 @@
 			}
 		}
 
-		@media screen and (max-width: 1140px) {
+		@media screen and (max-width: 1337px) {
 			display: flex;
 			flex-direction: column;
 			align-items: center;

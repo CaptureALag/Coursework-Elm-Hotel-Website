@@ -54,7 +54,7 @@ renderPageSortOptions model =
    div [class "sort-options"]
      [ label [] [text "Сортувати за"]
      , div [class "variants"]
-         (List.map (renderSortOption model) [Popularity, Stars, Price])
+         (List.map (renderSortOption model) [Popularity, Stars, Price, Depart])
      ]
 
 renderSortOption : Model -> SortOption -> Html Msg

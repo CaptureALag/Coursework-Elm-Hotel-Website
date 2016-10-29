@@ -29,7 +29,7 @@ type alias AppState =
     }
 
 type Route = MenuPage | HotelPage Hotel
-type SortOption = Popularity | Stars | Price
+type SortOption = Popularity | Stars | Price | Depart
 type SortOrder = Asc | Desc
 
 type alias AppContent = 

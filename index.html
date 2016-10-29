@@ -7927,6 +7927,7 @@ var _user$project$Models$HotelPage = function (a) {
 	return {ctor: 'HotelPage', _0: a};
 };
 var _user$project$Models$MenuPage = {ctor: 'MenuPage'};
+var _user$project$Models$Depart = {ctor: 'Depart'};
 var _user$project$Models$Price = {ctor: 'Price'};
 var _user$project$Models$Stars = {ctor: 'Stars'};
 var _user$project$Models$Popularity = {ctor: 'Popularity'};
@@ -7986,8 +7987,10 @@ var _user$project$ModelUtils$sortingOptionLabel = function (opt) {
 			return 'Популярністю';
 		case 'Stars':
 			return 'Кількістю зірок';
-		default:
+		case 'Price':
 			return 'Ціною';
+		default:
+			return 'Датою відправлення';
 	}
 };
 var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
@@ -8027,8 +8030,27 @@ var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
 									function (_) {
 										return _.stars;
 									});
-							default:
+							case 'Price':
 								return _elm_lang$core$List$sortBy(_user$project$ModelUtils$getHotelMinPrice);
+							default:
+								return _elm_lang$core$List$sortBy(
+									function (hotel) {
+										var _p9 = A2(
+											_elm_lang$core$List$map,
+											function (_p8) {
+												return A2(
+													_elm_lang$core$Maybe$withDefault,
+													-1,
+													_elm_lang$core$Result$toMaybe(
+														_elm_lang$core$String$toInt(_p8)));
+											},
+											A2(_elm_lang$core$String$split, '.', hotel.depart));
+										if ((((_p9.ctor === '::') && (_p9._1.ctor === '::')) && (_p9._1._1.ctor === '::')) && (_p9._1._1._1.ctor === '[]')) {
+											return (_p9._0 + (_p9._1._0 * 31)) + ((_p9._1._1._0 * 31) * 366);
+										} else {
+											return -1;
+										}
+									});
 						}
 					}()(_p5));
 			}(model.appContent.hotels)));
@@ -8441,7 +8463,7 @@ var _user$project$MainContent$renderPageSortOptions = function (model) {
 					_elm_lang$core$List$map,
 					_user$project$MainContent$renderSortOption(model),
 					_elm_lang$core$Native_List.fromArray(
-						[_user$project$Models$Popularity, _user$project$Models$Stars, _user$project$Models$Price])))
+						[_user$project$Models$Popularity, _user$project$Models$Stars, _user$project$Models$Price, _user$project$Models$Depart])))
 			]));
 };
 var _user$project$MainContent$renderBackButton = A2(
