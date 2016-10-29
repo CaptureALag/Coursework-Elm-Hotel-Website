@@ -194,6 +194,6 @@ update msg =
     (RouteChange route) ->
       updateAppState (\st -> { st | currentRoute = route})
     LogoClick ->
-      updateAppState (\st -> { st | currentRoute = MenuPage })
+      updateAppState (\st -> { st | currentRoute = MenuPage, currentFilterByCountry = Nothing, currentSortOption = Popularity, currentSortOrder = Desc, currentPage = 1 })
     SetFilterByCountry country ->
       updateAppState (\st -> { st | currentFilterByCountry = country})
