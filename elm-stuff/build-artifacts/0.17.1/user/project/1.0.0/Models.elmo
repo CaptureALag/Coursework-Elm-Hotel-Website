@@ -14,17 +14,13 @@ var _user$project$Models$Country = F3(
 	function (a, b, c) {
 		return {id: a, name: b, nameLocativeCase: c};
 	});
-var _user$project$Models$Hotel = F8(
-	function (a, b, c, d, e, f, g, h) {
-		return {id: a, name: b, popularity: c, countryId: d, stars: e, bgPhotoUrl: f, photoUrls: g, rooms: h};
+var _user$project$Models$Hotel = F9(
+	function (a, b, c, d, e, f, g, h, i) {
+		return {id: a, name: b, popularity: c, countryId: d, stars: e, bgPhotoUrl: f, photoUrls: g, priceOptions: h, duration: i};
 	});
-var _user$project$Models$Room = F4(
-	function (a, b, c, d) {
-		return {id: a, hotelId: b, personCapacity: c, priceOptions: d};
-	});
-var _user$project$Models$PriceOption = F2(
-	function (a, b) {
-		return {optionName: a, price: b};
+var _user$project$Models$PriceOption = F3(
+	function (a, b, c) {
+		return {name: a, personCapacity: b, price: c};
 	});
 var _user$project$Models$SetFilterByCountry = function (a) {
 	return {ctor: 'SetFilterByCountry', _0: a};

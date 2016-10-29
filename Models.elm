@@ -51,17 +51,12 @@ type alias Hotel =
     , stars : Int
     , bgPhotoUrl : String
     , photoUrls : List String
-    , rooms : List Room    
-    }
-
-type alias Room = 
-    { id : Int
-    , hotelId : String
-    , personCapacity : Int
     , priceOptions : List PriceOption
+    , duration : Int
     }
 
 type alias PriceOption =
-    { optionName : String
+    { name : String
+    , personCapacity : Int
     , price : Int
     }

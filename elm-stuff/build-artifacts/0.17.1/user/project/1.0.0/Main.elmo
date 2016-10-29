@@ -86,8 +86,14 @@ var _user$project$Main$main = {
 							bgPhotoUrl: 'bg_1.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),
-							rooms: _elm_lang$core$Native_List.fromArray(
-								[])
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 400},
+									{name: 'BB', personCapacity: 1, price: 550},
+									{name: 'OB', personCapacity: 2, price: 600},
+									{name: 'ALL', personCapacity: 2, price: 1000}
+								]),
+							duration: 6
 						},
 							{
 							id: 'akrathos-hotel',
@@ -98,8 +104,14 @@ var _user$project$Main$main = {
 							bgPhotoUrl: 'bg_2.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),
-							rooms: _elm_lang$core$Native_List.fromArray(
-								[])
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 200},
+									{name: 'BB', personCapacity: 1, price: 250},
+									{name: 'OB', personCapacity: 2, price: 300},
+									{name: 'ALL', personCapacity: 2, price: 800}
+								]),
+							duration: 5
 						},
 							{
 							id: 'alara-hotel',
@@ -110,8 +122,14 @@ var _user$project$Main$main = {
 							bgPhotoUrl: 'bg_3.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),
-							rooms: _elm_lang$core$Native_List.fromArray(
-								[])
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 150},
+									{name: 'BB', personCapacity: 1, price: 250},
+									{name: 'OB', personCapacity: 2, price: 300},
+									{name: 'ALL', personCapacity: 2, price: 600}
+								]),
+							duration: 4
 						},
 							{
 							id: 'boumerang',
@@ -122,8 +140,14 @@ var _user$project$Main$main = {
 							bgPhotoUrl: 'bg_4.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),
-							rooms: _elm_lang$core$Native_List.fromArray(
-								[])
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 200},
+									{name: 'BB', personCapacity: 1, price: 250},
+									{name: 'OB', personCapacity: 2, price: 300},
+									{name: 'ALL', personCapacity: 2, price: 800}
+								]),
+							duration: 5
 						}
 						])
 				}

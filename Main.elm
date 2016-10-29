@@ -49,7 +49,26 @@ main =
               , stars = 5
               , bgPhotoUrl = "bg_1.jpg"
               , photoUrls = []
-              , rooms = []    
+              , priceOptions = 
+                  [ 
+                    { name = "OB"
+                    , personCapacity = 1
+                    , price = 400
+                    },
+                    { name = "BB"
+                    , personCapacity = 1
+                    , price = 550
+                    },
+                    { name = "OB"
+                    , personCapacity = 2
+                    , price = 600 
+                    }, 
+                    { name = "ALL"
+                    , personCapacity = 2
+                    , price = 1000
+                    }
+                  ]   
+              ,   duration = 6
               },  
               { id = "akrathos-hotel"
               , name = "Akrathos Hotel"
@@ -58,7 +77,26 @@ main =
               , stars = 4
               , bgPhotoUrl = "bg_2.jpg"
               , photoUrls = []
-              , rooms = []    
+              , priceOptions = 
+                  [ 
+                    { name = "OB"
+                    , personCapacity = 1
+                    , price = 200
+                    },
+                    { name = "BB"
+                    , personCapacity = 1
+                    , price = 250
+                    },
+                    { name = "OB"
+                    , personCapacity = 2
+                    , price = 300 
+                    }, 
+                    { name = "ALL"
+                    , personCapacity = 2
+                    , price = 800
+                    }
+                  ]
+              ,   duration = 5    
               },
               { id = "alara-hotel"
               , name = "Alara Hotel"
@@ -67,7 +105,26 @@ main =
               , stars = 3
               , bgPhotoUrl = "bg_3.jpg"
               , photoUrls = []
-              , rooms = []    
+              , priceOptions = 
+                  [ 
+                    { name = "OB"
+                    , personCapacity = 1
+                    , price = 150
+                    },
+                    { name = "BB"
+                    , personCapacity = 1
+                    , price = 250
+                    },
+                    { name = "OB"
+                    , personCapacity = 2
+                    , price = 300 
+                    }, 
+                    { name = "ALL"
+                    , personCapacity = 2
+                    , price = 600
+                    }
+                  ]  
+              ,   duration = 4
               },
               { id = "boumerang"
               , name = "Boumerang"
@@ -76,8 +133,27 @@ main =
               , stars = 4
               , bgPhotoUrl = "bg_4.jpg"
               , photoUrls = []
-              , rooms = []    
-              }
+              , priceOptions = 
+                  [ 
+                    { name = "OB"
+                    , personCapacity = 1
+                    , price = 200
+                    },
+                    { name = "BB"
+                    , personCapacity = 1
+                    , price = 250
+                    },
+                    { name = "OB"
+                    , personCapacity = 2
+                    , price = 300 
+                    }, 
+                    { name = "ALL"
+                    , personCapacity = 2
+                    , price = 800
+                    }
+                  ] 
+            , duration = 5
+            }
             ]
         }
     }

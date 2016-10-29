@@ -1,22 +1,53 @@
+var _user$project$ModelUtils$getHotelFormattedDuration = function (hotel) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		'Тривалість: ',
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Basics$toString(hotel.duration),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				' ',
+				function () {
+					var _p0 = hotel.duration;
+					if (_p0 === 4) {
+						return 'дні';
+					} else {
+						return 'днів';
+					}
+				}())));
+};
+var _user$project$ModelUtils$getHotelMinPrice = function (hotel) {
+	return A2(
+		_elm_lang$core$Maybe$withDefault,
+		-1,
+		_elm_lang$core$List$minimum(
+			A2(
+				_elm_lang$core$List$map,
+				function (_) {
+					return _.price;
+				},
+				hotel.priceOptions)));
+};
 var _user$project$ModelUtils$negateSortOrder = function (ord) {
-	var _p0 = ord;
-	if (_p0.ctor === 'Asc') {
+	var _p1 = ord;
+	if (_p1.ctor === 'Asc') {
 		return _user$project$Models$Desc;
 	} else {
 		return _user$project$Models$Asc;
 	}
 };
 var _user$project$ModelUtils$sortingOrderLabel = function (ord) {
-	var _p1 = ord;
-	if (_p1.ctor === 'Asc') {
+	var _p2 = ord;
+	if (_p2.ctor === 'Asc') {
 		return '▲';
 	} else {
 		return '▼';
 	}
 };
 var _user$project$ModelUtils$sortingOptionLabel = function (opt) {
-	var _p2 = opt;
-	switch (_p2.ctor) {
+	var _p3 = opt;
+	switch (_p3.ctor) {
 		case 'Popularity':
 			return 'Популярністю';
 		case 'Stars':
@@ -30,28 +61,28 @@ var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
 		_elm_lang$core$List$take,
 		4,
 		function () {
-			var _p3 = model.appState.currentFilterByCountry;
-			if (_p3.ctor === 'Just') {
+			var _p4 = model.appState.currentFilterByCountry;
+			if (_p4.ctor === 'Just') {
 				return _elm_lang$core$List$filter(
 					function (hotel) {
-						return _elm_lang$core$Native_Utils.eq(hotel.countryId, _p3._0.id);
+						return _elm_lang$core$Native_Utils.eq(hotel.countryId, _p4._0.id);
 					});
 			} else {
 				return _elm_lang$core$Basics$identity;
 			}
 		}()(
-			function (_p4) {
+			function (_p5) {
 				return function () {
-					var _p5 = model.appState.currentSortOrder;
-					if (_p5.ctor === 'Asc') {
+					var _p6 = model.appState.currentSortOrder;
+					if (_p6.ctor === 'Asc') {
 						return _elm_lang$core$Basics$identity;
 					} else {
 						return _elm_lang$core$List$reverse;
 					}
 				}()(
 					function () {
-						var _p6 = model.appState.currentSortOption;
-						switch (_p6.ctor) {
+						var _p7 = model.appState.currentSortOption;
+						switch (_p7.ctor) {
 							case 'Popularity':
 								return _elm_lang$core$List$sortBy(
 									function (_) {
@@ -68,6 +99,6 @@ var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
 										return _.popularity;
 									});
 						}
-					}()(_p4));
+					}()(_p5));
 			}(model.appContent.hotels)));
 };

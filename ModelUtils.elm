@@ -38,3 +38,18 @@ negateSortOrder ord =
    case ord of
       Asc -> Desc
       Desc -> Asc
+
+getHotelMinPrice : Hotel -> Int
+getHotelMinPrice hotel =
+   Maybe.withDefault -1 (List.minimum (List.map (.price) hotel.priceOptions) )
+
+getHotelFormattedDuration : Hotel -> String
+getHotelFormattedDuration hotel =
+   "Тривалість: " ++ (toString hotel.duration) ++ " " ++ (
+      case hotel.duration of
+         4 -> "дні"
+         _ -> "днів"
+
+         {- TODO -}       
+           
+   )
