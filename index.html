@@ -7894,7 +7894,15 @@ var _user$project$Models$Hotel = function (a) {
 							return function (h) {
 								return function (i) {
 									return function (j) {
-										return {id: a, name: b, popularity: c, countryId: d, stars: e, bgPhotoUrl: f, photoUrls: g, priceOptions: h, duration: i, depart: j};
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return {id: a, name: b, popularity: c, countryId: d, stars: e, bgPhotoUrl: f, photoUrls: g, priceOptions: h, duration: i, depart: j, videoUrl: k, description: l, features: m, postDescription: n};
+													};
+												};
+											};
+										};
 									};
 								};
 							};
@@ -8291,6 +8299,74 @@ var _user$project$RightBlock$renderRightBlock = function (model) {
 				_user$project$RightBlock$renderRightBlockReviews(model.appState)
 			]));
 };
+var _user$project$MainContent$renderHotelPageBody = F2(
+	function (model, hotel) {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('hotel-page-body')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					function () {
+					var _p0 = hotel.videoUrl;
+					if (_p0.ctor === 'Just') {
+						return A2(
+							_elm_lang$html$Html$iframe,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Attributes$width(420),
+									_elm_lang$html$Html_Attributes$height(315),
+									_elm_lang$html$Html_Attributes$src(_p0._0)
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[]));
+					} else {
+						return _elm_lang$html$Html$text('');
+					}
+				}(),
+					A2(
+					_elm_lang$html$Html$p,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('description')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(hotel.description)
+						])),
+					A2(
+					_elm_lang$html$Html$ul,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('features')
+						]),
+					A2(
+						_elm_lang$core$List$map,
+						function (feature) {
+							return A2(
+								_elm_lang$html$Html$li,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(feature)
+									]));
+						},
+						hotel.features)),
+					A2(
+					_elm_lang$html$Html$aside,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('post-description')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(hotel.postDescription)
+						]))
+				]));
+	});
 var _user$project$MainContent$renderMenuPageItem = function (hotel) {
 	return A2(
 		_elm_lang$html$Html$figure,
@@ -8487,8 +8563,8 @@ var _user$project$MainContent$renderHeadling = function (model) {
 				_elm_lang$html$Html_Attributes$class('headling')
 			]),
 		function () {
-			var _p0 = model.appState.currentRoute;
-			if (_p0.ctor === 'MenuPage') {
+			var _p1 = model.appState.currentRoute;
+			if (_p1.ctor === 'MenuPage') {
 				return _elm_lang$core$Native_List.fromArray(
 					[
 						_user$project$MainContent$renderPageSortOptions(model)
@@ -8510,7 +8586,8 @@ var _user$project$MainContent$renderHotelPage = F2(
 			_elm_lang$core$Native_List.fromArray(
 				[
 					_user$project$MainContent$renderHeadling(model),
-					_user$project$MainContent$renderMenuPageItem(hotel)
+					_user$project$MainContent$renderMenuPageItem(hotel),
+					A2(_user$project$MainContent$renderHotelPageBody, model, hotel)
 				]));
 	});
 var _user$project$MainContent$renderMenuPage = function (model) {
@@ -8538,11 +8615,11 @@ var _user$project$MainContent$renderMainContent = function (model) {
 		_elm_lang$core$Native_List.fromArray(
 			[
 				function () {
-				var _p1 = model.appState.currentRoute;
-				if (_p1.ctor === 'MenuPage') {
+				var _p2 = model.appState.currentRoute;
+				if (_p2.ctor === 'MenuPage') {
 					return _user$project$MainContent$renderMenuPage(model);
 				} else {
-					return A2(_user$project$MainContent$renderHotelPage, model, _p1._0);
+					return A2(_user$project$MainContent$renderHotelPage, model, _p2._0);
 				}
 			}()
 			]));
@@ -8708,7 +8785,12 @@ var _user$project$Main$main = {
 									{name: 'ALL', personCapacity: 2, price: 1000}
 								]),
 							duration: 6,
-							depart: '14.08.2017'
+							depart: '14.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Just('https://www.youtube.com/embed/1tP2INzqnaQ'),
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Vivamus at felis quis massa hendrerit rutrum.', 'Aliquam erat sem, congue et elementum in, pretium eu eros.', 'Suspendisse potenti. Quisque arcu ipsum, pulvinar quis pulvinar feugiat, aliquam ac turpis.', 'Fusce rhoncus massa lorem. Etiam feugiat magna aliquet arcu vehicula, vel laoreet enim tincidunt.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
 						},
 							{
 							id: 'akrathos-hotel',
@@ -8727,7 +8809,12 @@ var _user$project$Main$main = {
 									{name: 'ALL', personCapacity: 2, price: 800}
 								]),
 							duration: 5,
-							depart: '18.08.2017'
+							depart: '8.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Nothing,
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Donec sit amet sem vulputate neque tempor elementum.', 'Maecenas congue, tortor ut fringilla interdum, erat metus accumsan ligula, at faucibus augue lorem sed ante.', 'Pellentesque pharetra luctus velit imperdiet lobortis. Praesent rutrum condimentum tempus.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
 						},
 							{
 							id: 'alara-hotel',
@@ -8746,7 +8833,12 @@ var _user$project$Main$main = {
 									{name: 'ALL', personCapacity: 2, price: 600}
 								]),
 							duration: 4,
-							depart: '24.08.2017'
+							depart: '24.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Nothing,
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Suspendisse volutpat at odio sed dignissim.', 'Donec sit amet sem vulputate neque tempor elementum.', 'Sed nec lorem eu felis fringilla faucibus.', 'Pellentesque pharetra luctus velit imperdiet lobortis. Praesent rutrum condimentum tempus.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
 						},
 							{
 							id: 'boumerang',
@@ -8765,7 +8857,12 @@ var _user$project$Main$main = {
 									{name: 'ALL', personCapacity: 2, price: 800}
 								]),
 							duration: 5,
-							depart: '21.08.2017'
+							depart: '21.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Nothing,
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Suspendisse volutpat at odio sed dignissim.', 'Donec sit amet sem vulputate neque tempor elementum.', 'Sed nec lorem eu felis fringilla faucibus.', 'Pellentesque pharetra luctus velit imperdiet lobortis. Praesent rutrum condimentum tempus.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
 						}
 						])
 				}

@@ -54,7 +54,14 @@ type alias Hotel =
     , priceOptions : List PriceOption
     , duration : Int
     , depart : String
+
+    , photoUrls : List String
+    , videoUrl : Maybe String
+    , description : String
+    , features : List String
+    , postDescription : String
     }
+
 
 type alias PriceOption =
     { name : String

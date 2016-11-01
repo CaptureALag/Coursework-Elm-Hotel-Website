@@ -30,6 +30,7 @@ renderHotelPage model hotel =
    div [class "hotel-page"]
       [ renderHeadling model
       , renderMenuPageItem hotel
+      , renderHotelPageBody model hotel
       ]
 
 renderHeadling : Model -> Html Msg
@@ -88,4 +89,16 @@ renderMenuPageItem hotel =
              ,  h6 [class "price-from"] [text ("Ціна: від $" ++ (toString(getHotelMinPrice hotel)))]
              ]    
          ]
+     ]
+
+renderHotelPageBody : Model -> Hotel -> Html Msg
+renderHotelPageBody model hotel =
+   div [class "hotel-page-body"]
+     [ (case hotel.videoUrl of
+           Just url -> iframe [width 420, height 315, src url] []
+           Nothing -> text ""
+       )
+     , p [class "description"] [text hotel.description]
+     , ul [class "features"] (List.map (\feature -> li [] [text feature]) hotel.features)
+     , aside [class "post-description"] [text hotel.postDescription]
      ]

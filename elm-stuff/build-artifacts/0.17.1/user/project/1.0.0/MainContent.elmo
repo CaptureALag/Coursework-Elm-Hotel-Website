@@ -1,3 +1,71 @@
+var _user$project$MainContent$renderHotelPageBody = F2(
+	function (model, hotel) {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('hotel-page-body')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					function () {
+					var _p0 = hotel.videoUrl;
+					if (_p0.ctor === 'Just') {
+						return A2(
+							_elm_lang$html$Html$iframe,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Attributes$width(420),
+									_elm_lang$html$Html_Attributes$height(315),
+									_elm_lang$html$Html_Attributes$src(_p0._0)
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[]));
+					} else {
+						return _elm_lang$html$Html$text('');
+					}
+				}(),
+					A2(
+					_elm_lang$html$Html$p,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('description')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(hotel.description)
+						])),
+					A2(
+					_elm_lang$html$Html$ul,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('features')
+						]),
+					A2(
+						_elm_lang$core$List$map,
+						function (feature) {
+							return A2(
+								_elm_lang$html$Html$li,
+								_elm_lang$core$Native_List.fromArray(
+									[]),
+								_elm_lang$core$Native_List.fromArray(
+									[
+										_elm_lang$html$Html$text(feature)
+									]));
+						},
+						hotel.features)),
+					A2(
+					_elm_lang$html$Html$aside,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('post-description')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(hotel.postDescription)
+						]))
+				]));
+	});
 var _user$project$MainContent$renderMenuPageItem = function (hotel) {
 	return A2(
 		_elm_lang$html$Html$figure,
@@ -194,8 +262,8 @@ var _user$project$MainContent$renderHeadling = function (model) {
 				_elm_lang$html$Html_Attributes$class('headling')
 			]),
 		function () {
-			var _p0 = model.appState.currentRoute;
-			if (_p0.ctor === 'MenuPage') {
+			var _p1 = model.appState.currentRoute;
+			if (_p1.ctor === 'MenuPage') {
 				return _elm_lang$core$Native_List.fromArray(
 					[
 						_user$project$MainContent$renderPageSortOptions(model)
@@ -217,7 +285,8 @@ var _user$project$MainContent$renderHotelPage = F2(
 			_elm_lang$core$Native_List.fromArray(
 				[
 					_user$project$MainContent$renderHeadling(model),
-					_user$project$MainContent$renderMenuPageItem(hotel)
+					_user$project$MainContent$renderMenuPageItem(hotel),
+					A2(_user$project$MainContent$renderHotelPageBody, model, hotel)
 				]));
 	});
 var _user$project$MainContent$renderMenuPage = function (model) {
@@ -245,11 +314,11 @@ var _user$project$MainContent$renderMainContent = function (model) {
 		_elm_lang$core$Native_List.fromArray(
 			[
 				function () {
-				var _p1 = model.appState.currentRoute;
-				if (_p1.ctor === 'MenuPage') {
+				var _p2 = model.appState.currentRoute;
+				if (_p2.ctor === 'MenuPage') {
 					return _user$project$MainContent$renderMenuPage(model);
 				} else {
-					return A2(_user$project$MainContent$renderHotelPage, model, _p1._0);
+					return A2(_user$project$MainContent$renderHotelPage, model, _p2._0);
 				}
 			}()
 			]));
