@@ -7,13 +7,17 @@ import Html exposing(..)
 import Html.Attributes exposing(..)
 import Html.Events exposing(onClick)
 
+import RightBlock exposing(..)
+
 renderMainContent : Model -> Html Msg
 renderMainContent model =
-   div [class "main-content"]
-     [
-       case model.appState.currentRoute of
-          MenuPage -> renderMenuPage model
-          HotelPage hotel -> renderHotelPage model hotel
+   div [class "content"]
+     [ div [class "main-content"] 
+        [ case model.appState.currentRoute of
+             MenuPage -> renderMenuPage model
+             HotelPage hotel -> renderHotelPage model hotel
+        ]
+     , renderRightBlock model
      ]
 
 renderMenuPage : Model -> Html Msg

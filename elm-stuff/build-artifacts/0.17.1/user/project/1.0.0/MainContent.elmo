@@ -379,17 +379,27 @@ var _user$project$MainContent$renderMainContent = function (model) {
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_elm_lang$html$Html_Attributes$class('main-content')
+				_elm_lang$html$Html_Attributes$class('content')
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
-				function () {
-				var _p2 = model.appState.currentRoute;
-				if (_p2.ctor === 'MenuPage') {
-					return _user$project$MainContent$renderMenuPage(model);
-				} else {
-					return A2(_user$project$MainContent$renderHotelPage, model, _p2._0);
-				}
-			}()
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('main-content')
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						function () {
+						var _p2 = model.appState.currentRoute;
+						if (_p2.ctor === 'MenuPage') {
+							return _user$project$MainContent$renderMenuPage(model);
+						} else {
+							return A2(_user$project$MainContent$renderHotelPage, model, _p2._0);
+						}
+					}()
+					])),
+				_user$project$RightBlock$renderRightBlock(model)
 			]));
 };

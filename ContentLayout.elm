@@ -6,15 +6,14 @@ import Html.Events exposing (onClick)
 import Models exposing (..)
 import List exposing (append)
 
-import RightBlock exposing(renderRightBlock)
 import MainContent exposing(renderMainContent)
+import RightBlock exposing(renderTopMostNavIcons)
 
 renderLayout : (Model -> Html Msg) -> Model -> Html Msg
 renderLayout renderContent model =
    div [class "container"]
      (renderMetadata 
-     ::renderHeader
-     ::(renderRightBlock model)
+     ::(renderHeader model)
      ::(renderMainContent model)
      ::renderFooter
      ::[])
@@ -27,11 +26,11 @@ renderMetadata =
    , node "script" [src "https://cdnjs.cloudflare.com/ajax/libs/less.js/2.7.1/less.min.js"] []
    ]
 
-renderHeader : Html Msg
-renderHeader =
+renderHeader : Model -> Html Msg
+renderHeader model =
    header [] [
      div [class "logo", onClick LogoClick] []        
-     
+   , renderTopMostNavIcons model.appState
    ]
 
 renderFooter : Html Msg

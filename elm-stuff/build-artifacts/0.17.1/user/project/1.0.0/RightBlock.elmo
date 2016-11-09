@@ -213,7 +213,6 @@ var _user$project$RightBlock$renderRightBlock = function (model) {
 			]),
 		_elm_lang$core$Native_List.fromArray(
 			[
-				_user$project$RightBlock$renderTopMostNavIcons(model.appState),
 				A2(_user$project$RightBlock$renderRightBlockNavigation, model.appState, model.appContent),
 				_user$project$RightBlock$renderRightBlockCallback(model.appState),
 				_user$project$RightBlock$renderRightBlockReviews(model.appState)

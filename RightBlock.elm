@@ -1,4 +1,4 @@
-module RightBlock exposing (renderRightBlock)
+module RightBlock exposing (renderRightBlock, renderTopMostNavIcons)
 
 import Html exposing(Html, node, header, div, a, nav, form, text, input, h4, button)
 import Html.Attributes exposing(href, class, classList, rel, type', name, placeholder, value, style, src)
@@ -10,8 +10,7 @@ import List exposing (append)
 renderRightBlock : Model -> Html Msg
 renderRightBlock model =
    div [class "right-block"] 
-      [ renderTopMostNavIcons model.appState
-      , renderRightBlockNavigation model.appState model.appContent
+      [ renderRightBlockNavigation model.appState model.appContent
       , renderRightBlockCallback model.appState
       , renderRightBlockReviews model.appState
       ] 

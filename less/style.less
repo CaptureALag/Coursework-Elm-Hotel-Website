@@ -20,6 +20,9 @@ body {
         height: 128px;
         background: linear-gradient(#bbb 0%, #ddd 15%, #eee 90%, #ccc 100%);
         
+        .flex-block();
+        justify-content: space-between;
+
         & > .logo {
             width: 300px;
             height: 100px;
@@ -75,11 +78,17 @@ body {
     }
 }
 
-.main-content {
-    width: calc(~"100% - 366px");
-    overflow: hidden;
-    position: relative;
+.content {
+    .flex-block();
+
+    & > .main-content {
+        width: calc(~"100% - 366px");
+        overflow: hidden;
+        position: relative;
+    }
 }
+
+@import 'nav-icons';
 
 @import 'right-block';
 
