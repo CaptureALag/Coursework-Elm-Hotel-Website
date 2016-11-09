@@ -1,3 +1,69 @@
+var _user$project$ContentLayout$renderFooter = A2(
+	_elm_lang$html$Html$footer,
+	_elm_lang$core$Native_List.fromArray(
+		[]),
+	_elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_lang$html$Html$h5,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text('Зв\'яжіться з нами:')
+				])),
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('numbers-container')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$span,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('+38 (044) 123 45 67')
+						])),
+					A2(
+					_elm_lang$html$Html$span,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('+38 (044) 123 45 68')
+						])),
+					A2(
+					_elm_lang$html$Html$span,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('+38 (044) 123 45 69')
+						])),
+					A2(
+					_elm_lang$html$Html$span,
+					_elm_lang$core$Native_List.fromArray(
+						[]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('+38 (044) 123 45 70')
+						]))
+				])),
+			A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('copyright')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text('Returnal Inc. © All rights reserved')
+				]))
+		]));
 var _user$project$ContentLayout$renderHeader = A2(
 	_elm_lang$html$Html$header,
 	_elm_lang$core$Native_List.fromArray(
@@ -32,6 +98,16 @@ var _user$project$ContentLayout$renderMetadata = A2(
 				[])),
 			A3(
 			_elm_lang$html$Html$node,
+			'link',
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$rel('stylesheet'),
+					_elm_lang$html$Html_Attributes$href('https://fonts.googleapis.com/css?family=Amatica+SC:400,700|Cairo:200,300,400,600,700,900|Oranienbaum|Rubik:300,300i,400,400i,500,500i,700,700i,900,900i&amp;subset=cyrillic')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[])),
+			A3(
+			_elm_lang$html$Html$node,
 			'script',
 			_elm_lang$core$Native_List.fromArray(
 				[
@@ -60,6 +136,9 @@ var _user$project$ContentLayout$renderLayout = F2(
 						A2(
 							_elm_lang$core$List_ops['::'],
 							_user$project$MainContent$renderMainContent(model),
-							_elm_lang$core$Native_List.fromArray(
-								[]))))));
+							A2(
+								_elm_lang$core$List_ops['::'],
+								_user$project$ContentLayout$renderFooter,
+								_elm_lang$core$Native_List.fromArray(
+									[])))))));
 	});

@@ -28,7 +28,9 @@ var _user$project$Models$Hotel = function (a) {
 											return function (l) {
 												return function (m) {
 													return function (n) {
-														return {id: a, name: b, popularity: c, countryId: d, stars: e, bgPhotoUrl: f, photoUrls: g, priceOptions: h, duration: i, depart: j, videoUrl: k, description: l, features: m, postDescription: n};
+														return function (o) {
+															return {id: a, name: b, popularity: c, countryId: d, stars: e, bgPhotoUrl: f, photoUrls: g, priceOptions: h, duration: i, depart: j, photoUrls: k, videoUrl: l, description: m, features: n, postDescription: o};
+														};
 													};
 												};
 											};

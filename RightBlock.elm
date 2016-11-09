@@ -36,7 +36,6 @@ renderRightBlockNavigation : AppState -> AppContent -> Html Msg
 renderRightBlockNavigation appState appContent = nav [classList[("hidden", appState.selectedNavIcon /= "icon-navigation")]]
    ( 
      (a [class "link-country", onClick (SetFilterByCountry Nothing), classList [("selected", appState.currentFilterByCountry == Nothing)]][text "Всі тури"])::
-     (List.append
        ( List.map (\cntry -> 
           a 
             [ class "link-country", 
@@ -45,8 +44,6 @@ renderRightBlockNavigation appState appContent = nav [classList[("hidden", appSt
             ] [text ("Тури на " ++ cntry.nameLocativeCase)]
         ) appContent.countries      
        )
-       [a [class "link-contacts"] [text "Контакти"]]
-     )
    )
 
 renderRightBlockCallback : AppState -> Html Msg

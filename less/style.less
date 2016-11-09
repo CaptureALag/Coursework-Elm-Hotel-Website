@@ -32,6 +32,47 @@ body {
             cursor: pointer;
         }
     }
+
+    footer {
+        width: calc(~"100% - 416px");
+        padding: 25px;
+        background: linear-gradient(#ccc 0%, #eee 10%, #ddd 85%,#bbb 100%);
+
+        h5, .numbers-container > span {
+            margin: 0;
+            display: inline-block;
+            text-transform: uppercase;
+            font-weight: normal;
+            font-size: 24px;
+            font-family: 'Oranienbaum', serif;
+        }
+
+        h5 {
+            width: 274px;
+            text-align: right;
+        }
+
+        .numbers-container {
+            float: right;
+            width: calc(~"100% - 350px");
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            & > span {
+                display: inline-block;
+                letter-spacing: 1px;
+            }
+        }
+
+        .copyright {
+            text-transform: uppercase;
+            font-size: 14px;
+            margin-left: 23px;
+            margin-top: 23px;
+            opacity: 0.3;
+            font-family: 'Cairo', sans-serif;
+        }
+    }
 }
 
 .main-content {
