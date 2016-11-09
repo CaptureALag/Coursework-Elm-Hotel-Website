@@ -36,6 +36,7 @@ type SortOrder = Asc | Desc
 type alias AppContent = 
     { countries : List Country
     , hotels : List Hotel
+    , blog : List BlogEntry
     }
 
 type alias Country =
@@ -61,6 +62,13 @@ type alias Hotel =
     , description : String
     , features : List String
     , postDescription : String
+    }
+
+type alias BlogEntry = 
+    { id : Int
+    , timePosted : String
+    , header : String
+    , fullText : String
     }
 
 

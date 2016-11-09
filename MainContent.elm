@@ -16,8 +16,9 @@ renderMainContent model =
         [ case model.appState.currentRoute of
              MenuPage -> renderMenuPage model
              HotelPage hotel -> renderHotelPage model hotel
+        , renderRightBlock model
         ]
-     , renderRightBlock model
+     {-     , renderRightBlock model -}
      ]
 
 renderMenuPage : Model -> Html Msg

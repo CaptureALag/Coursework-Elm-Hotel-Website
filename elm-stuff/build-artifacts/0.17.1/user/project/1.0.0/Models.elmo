@@ -6,9 +6,9 @@ var _user$project$Models$AppState = F6(
 	function (a, b, c, d, e, f) {
 		return {selectedNavIcon: a, currentRoute: b, currentSortOption: c, currentSortOrder: d, currentPage: e, currentFilterByCountry: f};
 	});
-var _user$project$Models$AppContent = F2(
-	function (a, b) {
-		return {countries: a, hotels: b};
+var _user$project$Models$AppContent = F3(
+	function (a, b, c) {
+		return {countries: a, hotels: b, blog: c};
 	});
 var _user$project$Models$Country = F3(
 	function (a, b, c) {
@@ -45,6 +45,10 @@ var _user$project$Models$Hotel = function (a) {
 		};
 	};
 };
+var _user$project$Models$BlogEntry = F4(
+	function (a, b, c, d) {
+		return {id: a, timePosted: b, header: c, fullText: d};
+	});
 var _user$project$Models$PriceOption = F3(
 	function (a, b, c) {
 		return {name: a, personCapacity: b, price: c};

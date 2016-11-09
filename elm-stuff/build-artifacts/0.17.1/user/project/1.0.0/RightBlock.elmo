@@ -1,3 +1,56 @@
+var _user$project$RightBlock$renderBlog = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('blog')
+			]),
+		A2(
+			_elm_lang$core$List$map,
+			function (entry) {
+				return A2(
+					_elm_lang$html$Html$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('entry')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
+							_elm_lang$html$Html$div,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Attributes$class('time')
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text(entry.timePosted)
+								])),
+							A2(
+							_elm_lang$html$Html$div,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Attributes$class('preview')
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text(entry.header)
+								])),
+							A2(
+							_elm_lang$html$Html$a,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Attributes$href('#'),
+									_elm_lang$html$Html_Attributes$class('read-more')
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text('Читати далі')
+								]))
+						]));
+			},
+			model.appContent.blog));
+};
 var _user$project$RightBlock$renderRightBlockReviews = function (appState) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -215,6 +268,7 @@ var _user$project$RightBlock$renderRightBlock = function (model) {
 			[
 				A2(_user$project$RightBlock$renderRightBlockNavigation, model.appState, model.appContent),
 				_user$project$RightBlock$renderRightBlockCallback(model.appState),
-				_user$project$RightBlock$renderRightBlockReviews(model.appState)
+				_user$project$RightBlock$renderRightBlockReviews(model.appState),
+				_user$project$RightBlock$renderBlog(model)
 			]));
 };

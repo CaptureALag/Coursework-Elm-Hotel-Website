@@ -14,9 +14,13 @@ button {
 }
 
 .right-block {
+    background: #eee;
 
     width: 366px;
-    position: relative;
+    position: absolute;
+    right: -366px;
+    height: calc(~"100% + 128px");
+    top: 0;
 
     & > nav, & > .callback-form, & > .reviews {
         display: block;
@@ -108,6 +112,16 @@ button {
 
     & > .reviews {
         background: #d3e97c;
+    }
+
+    &::after {
+        content: "";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        height: 128px;
+        width: 100%;
+        background: linear-gradient(#eee 10%, #ddd 85%, #bbb 100%);
     }
 }
 

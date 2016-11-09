@@ -13,6 +13,7 @@ renderRightBlock model =
       [ renderRightBlockNavigation model.appState model.appContent
       , renderRightBlockCallback model.appState
       , renderRightBlockReviews model.appState
+      , renderBlog model
       ] 
 
 renderTopMostNavIcons : AppState -> Html Msg
@@ -61,3 +62,15 @@ renderRightBlockReviews appState =
       [
              text "Тут будуть відгуки" 
       ]
+
+renderBlog : Model -> Html Msg
+renderBlog model =
+   div [class "blog"]
+      (List.map (\entry -> 
+           div [class "entry"] 
+             [ div [class "time"] [text entry.timePosted]
+             , div [class "preview"] [text entry.header]
+             , a [href "#", class "read-more"] [text "Читати далі"]         
+             ]     
+         ) model.appContent.blog
+      )

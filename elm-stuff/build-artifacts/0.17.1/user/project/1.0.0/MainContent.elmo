@@ -398,8 +398,8 @@ var _user$project$MainContent$renderMainContent = function (model) {
 						} else {
 							return A2(_user$project$MainContent$renderHotelPage, model, _p2._0);
 						}
-					}()
-					])),
-				_user$project$RightBlock$renderRightBlock(model)
+					}(),
+						_user$project$RightBlock$renderRightBlock(model)
+					]))
 			]));
 };
