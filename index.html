@@ -7919,6 +7919,9 @@ var _user$project$Models$PriceOption = F3(
 	function (a, b, c) {
 		return {name: a, personCapacity: b, price: c};
 	});
+var _user$project$Models$Pagination = function (a) {
+	return {ctor: 'Pagination', _0: a};
+};
 var _user$project$Models$SetFilterByCountry = function (a) {
 	return {ctor: 'SetFilterByCountry', _0: a};
 };
@@ -8003,21 +8006,33 @@ var _user$project$ModelUtils$sortingOptionLabel = function (opt) {
 			return 'Датою відправлення';
 	}
 };
+var _user$project$ModelUtils$filteredHotels = function (model) {
+	return function () {
+		var _p4 = model.appState.currentFilterByCountry;
+		if (_p4.ctor === 'Just') {
+			return _elm_lang$core$List$filter(
+				function (hotel) {
+					return _elm_lang$core$Native_Utils.eq(hotel.countryId, _p4._0.id);
+				});
+		} else {
+			return _elm_lang$core$Basics$identity;
+		}
+	}()(model.appContent.hotels);
+};
+var _user$project$ModelUtils$hotelsPerPage = 4;
+var _user$project$ModelUtils$pagesCount = function (model) {
+	return _elm_lang$core$Basics$ceiling(
+		_elm_lang$core$Basics$toFloat(
+			_elm_lang$core$List$length(
+				_user$project$ModelUtils$filteredHotels(model))) / _elm_lang$core$Basics$toFloat(_user$project$ModelUtils$hotelsPerPage));
+};
 var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
 	return A2(
 		_elm_lang$core$List$take,
-		4,
-		function () {
-			var _p4 = model.appState.currentFilterByCountry;
-			if (_p4.ctor === 'Just') {
-				return _elm_lang$core$List$filter(
-					function (hotel) {
-						return _elm_lang$core$Native_Utils.eq(hotel.countryId, _p4._0.id);
-					});
-			} else {
-				return _elm_lang$core$Basics$identity;
-			}
-		}()(
+		_user$project$ModelUtils$hotelsPerPage,
+		A2(
+			_elm_lang$core$List$drop,
+			_user$project$ModelUtils$hotelsPerPage * (model.appState.currentPage - 1),
 			function (_p5) {
 				return function () {
 					var _p6 = model.appState.currentSortOrder;
@@ -8063,7 +8078,8 @@ var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
 									});
 						}
 					}()(_p5));
-			}(model.appContent.hotels)));
+			}(
+				_user$project$ModelUtils$filteredHotels(model))));
 };
 var _user$project$RightBlock$renderRightBlockReviews = function (appState) {
 	return A2(
@@ -8578,6 +8594,7 @@ var _user$project$MainContent$renderHotelPage = F2(
 				]));
 	});
 var _user$project$MainContent$renderMenuPage = function (model) {
+	var currentPage = model.appState.currentPage;
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
@@ -8585,12 +8602,81 @@ var _user$project$MainContent$renderMenuPage = function (model) {
 				_elm_lang$html$Html_Attributes$class('menu-page')
 			]),
 		A2(
-			_elm_lang$core$List_ops['::'],
-			_user$project$MainContent$renderHeadling(model),
+			_elm_lang$core$List$append,
 			A2(
-				_elm_lang$core$List$map,
-				_user$project$MainContent$renderMenuPageItem,
-				_user$project$ModelUtils$getHotelsOnCurrentPage(model))));
+				_elm_lang$core$List_ops['::'],
+				_user$project$MainContent$renderHeadling(model),
+				A2(
+					_elm_lang$core$List$map,
+					_user$project$MainContent$renderMenuPageItem,
+					_user$project$ModelUtils$getHotelsOnCurrentPage(model))),
+			_elm_lang$core$Native_Utils.eq(
+				_user$project$ModelUtils$pagesCount(model),
+				1) ? _elm_lang$core$Native_List.fromArray(
+				[]) : _elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('pagination')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
+							_elm_lang$html$Html$button,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Events$onClick(
+									_user$project$Models$Pagination(-1)),
+									_elm_lang$html$Html_Attributes$classList(
+									_elm_lang$core$Native_List.fromArray(
+										[
+											{
+											ctor: '_Tuple2',
+											_0: 'hidden',
+											_1: _elm_lang$core$Native_Utils.eq(currentPage, 1)
+										},
+											{ctor: '_Tuple2', _0: 'page-prev', _1: true}
+										]))
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[])),
+							A2(
+							_elm_lang$html$Html$span,
+							_elm_lang$core$Native_List.fromArray(
+								[]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text(
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										_elm_lang$core$Basics$toString(currentPage),
+										' сторінка'))
+								])),
+							A2(
+							_elm_lang$html$Html$button,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Events$onClick(
+									_user$project$Models$Pagination(1)),
+									_elm_lang$html$Html_Attributes$classList(
+									_elm_lang$core$Native_List.fromArray(
+										[
+											{
+											ctor: '_Tuple2',
+											_0: 'hidden',
+											_1: _elm_lang$core$Native_Utils.eq(
+												currentPage,
+												_user$project$ModelUtils$pagesCount(model))
+										},
+											{ctor: '_Tuple2', _0: 'page-next', _1: true}
+										]))
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[]))
+						]))
+				])));
 };
 var _user$project$MainContent$renderMainContent = function (model) {
 	return A2(
@@ -8779,7 +8865,7 @@ var _user$project$Main$update = function (msg) {
 				function (st) {
 					return _elm_lang$core$Native_Utils.update(
 						st,
-						{currentSortOption: _p0._0, currentSortOrder: _p0._1});
+						{currentSortOption: _p0._0, currentSortOrder: _p0._1, currentPage: 1});
 				});
 		case 'RouteChange':
 			return _user$project$Main$updateAppState(
@@ -8795,12 +8881,19 @@ var _user$project$Main$update = function (msg) {
 						st,
 						{currentRoute: _user$project$Models$MenuPage, currentFilterByCountry: _elm_lang$core$Maybe$Nothing, currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Desc, currentPage: 1});
 				});
+		case 'SetFilterByCountry':
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{currentFilterByCountry: _p0._0, currentPage: 1});
+				});
 		default:
 			return _user$project$Main$updateAppState(
 				function (st) {
 					return _elm_lang$core$Native_Utils.update(
 						st,
-						{currentFilterByCountry: _p0._0});
+						{currentPage: st.currentPage + _p0._0});
 				});
 	}
 };
@@ -8912,6 +9005,198 @@ var _user$project$Main$main = {
 							popularity: 4,
 							countryId: 'crit',
 							stars: 4,
+							bgPhotoUrl: 'bg_4.jpg',
+							photoUrls: _elm_lang$core$Native_List.fromArray(
+								[]),
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 200},
+									{name: 'BB', personCapacity: 1, price: 250},
+									{name: 'OB', personCapacity: 2, price: 300},
+									{name: 'ALL', personCapacity: 2, price: 800}
+								]),
+							duration: 5,
+							depart: '21.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Nothing,
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Suspendisse volutpat at odio sed dignissim.', 'Donec sit amet sem vulputate neque tempor elementum.', 'Sed nec lorem eu felis fringilla faucibus.', 'Pellentesque pharetra luctus velit imperdiet lobortis. Praesent rutrum condimentum tempus.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
+						},
+							{
+							id: 'sample-hotel-1',
+							name: 'Sample Hotel 1',
+							popularity: -1,
+							countryId: 'malta',
+							stars: 3,
+							bgPhotoUrl: 'bg_1.jpg',
+							photoUrls: _elm_lang$core$Native_List.fromArray(
+								[]),
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 400},
+									{name: 'BB', personCapacity: 1, price: 550},
+									{name: 'OB', personCapacity: 2, price: 600},
+									{name: 'ALL', personCapacity: 2, price: 1000}
+								]),
+							duration: 6,
+							depart: '11.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Just('https://www.youtube.com/embed/1tP2INzqnaQ'),
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Vivamus at felis quis massa hendrerit rutrum.', 'Aliquam erat sem, congue et elementum in, pretium eu eros.', 'Suspendisse potenti. Quisque arcu ipsum, pulvinar quis pulvinar feugiat, aliquam ac turpis.', 'Fusce rhoncus massa lorem. Etiam feugiat magna aliquet arcu vehicula, vel laoreet enim tincidunt.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
+						},
+							{
+							id: 'sample-0',
+							name: 'Sample Hotel 0',
+							popularity: 0,
+							countryId: 'ibiza',
+							stars: 3,
+							bgPhotoUrl: 'bg_2.jpg',
+							photoUrls: _elm_lang$core$Native_List.fromArray(
+								[]),
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 200},
+									{name: 'BB', personCapacity: 1, price: 250},
+									{name: 'OB', personCapacity: 2, price: 300},
+									{name: 'ALL', personCapacity: 2, price: 800}
+								]),
+							duration: 5,
+							depart: '8.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Nothing,
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Donec sit amet sem vulputate neque tempor elementum.', 'Maecenas congue, tortor ut fringilla interdum, erat metus accumsan ligula, at faucibus augue lorem sed ante.', 'Pellentesque pharetra luctus velit imperdiet lobortis. Praesent rutrum condimentum tempus.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
+						},
+							{
+							id: 'sample-hotel-2',
+							name: 'Sample Hotel 2',
+							popularity: -2,
+							countryId: 'cyprus',
+							stars: 3,
+							bgPhotoUrl: 'bg_3.jpg',
+							photoUrls: _elm_lang$core$Native_List.fromArray(
+								[]),
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 150},
+									{name: 'BB', personCapacity: 1, price: 250},
+									{name: 'OB', personCapacity: 2, price: 300},
+									{name: 'ALL', personCapacity: 2, price: 600}
+								]),
+							duration: 4,
+							depart: '24.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Nothing,
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Suspendisse volutpat at odio sed dignissim.', 'Donec sit amet sem vulputate neque tempor elementum.', 'Sed nec lorem eu felis fringilla faucibus.', 'Pellentesque pharetra luctus velit imperdiet lobortis. Praesent rutrum condimentum tempus.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
+						},
+							{
+							id: 'sample-3',
+							name: 'Sample Hotel 3',
+							popularity: -3,
+							countryId: 'crit',
+							stars: 3,
+							bgPhotoUrl: 'bg_4.jpg',
+							photoUrls: _elm_lang$core$Native_List.fromArray(
+								[]),
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 200},
+									{name: 'BB', personCapacity: 1, price: 250},
+									{name: 'OB', personCapacity: 2, price: 300},
+									{name: 'ALL', personCapacity: 2, price: 800}
+								]),
+							duration: 5,
+							depart: '21.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Nothing,
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Suspendisse volutpat at odio sed dignissim.', 'Donec sit amet sem vulputate neque tempor elementum.', 'Sed nec lorem eu felis fringilla faucibus.', 'Pellentesque pharetra luctus velit imperdiet lobortis. Praesent rutrum condimentum tempus.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
+						},
+							{
+							id: 'sample-4',
+							name: 'Sample Hotel 4',
+							popularity: -1,
+							countryId: 'malta',
+							stars: 3,
+							bgPhotoUrl: 'bg_1.jpg',
+							photoUrls: _elm_lang$core$Native_List.fromArray(
+								[]),
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 400},
+									{name: 'BB', personCapacity: 1, price: 550},
+									{name: 'OB', personCapacity: 2, price: 600},
+									{name: 'ALL', personCapacity: 2, price: 1000}
+								]),
+							duration: 6,
+							depart: '14.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Just('https://www.youtube.com/embed/1tP2INzqnaQ'),
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Vivamus at felis quis massa hendrerit rutrum.', 'Aliquam erat sem, congue et elementum in, pretium eu eros.', 'Suspendisse potenti. Quisque arcu ipsum, pulvinar quis pulvinar feugiat, aliquam ac turpis.', 'Fusce rhoncus massa lorem. Etiam feugiat magna aliquet arcu vehicula, vel laoreet enim tincidunt.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
+						},
+							{
+							id: 'sample-5',
+							name: 'Sample Hotel 5',
+							popularity: -5,
+							countryId: 'ibiza',
+							stars: 3,
+							bgPhotoUrl: 'bg_2.jpg',
+							photoUrls: _elm_lang$core$Native_List.fromArray(
+								[]),
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 200},
+									{name: 'BB', personCapacity: 1, price: 250},
+									{name: 'OB', personCapacity: 2, price: 300},
+									{name: 'ALL', personCapacity: 2, price: 800}
+								]),
+							duration: 5,
+							depart: '8.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Nothing,
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.', 'Donec sit amet sem vulputate neque tempor elementum.', 'Maecenas congue, tortor ut fringilla interdum, erat metus accumsan ligula, at faucibus augue lorem sed ante.', 'Pellentesque pharetra luctus velit imperdiet lobortis. Praesent rutrum condimentum tempus.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
+						},
+							{
+							id: 'sample-6',
+							name: 'Sample Hotel 6',
+							popularity: -6,
+							countryId: 'cyprus',
+							stars: 3,
+							bgPhotoUrl: 'bg_3.jpg',
+							photoUrls: _elm_lang$core$Native_List.fromArray(
+								[]),
+							priceOptions: _elm_lang$core$Native_List.fromArray(
+								[
+									{name: 'OB', personCapacity: 1, price: 150},
+									{name: 'BB', personCapacity: 1, price: 250},
+									{name: 'OB', personCapacity: 2, price: 300},
+									{name: 'ALL', personCapacity: 2, price: 600}
+								]),
+							duration: 4,
+							depart: '24.08.2017',
+							videoUrl: _elm_lang$core$Maybe$Nothing,
+							description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquet lobortis turpis, nec suscipit diam. Nulla facilisi. Nunc varius nunc sit amet metus faucibus iaculis. Maecenas faucibus condimentum urna, sit amet placerat velit blandit in. Sed tincidunt, est et porta tincidunt, purus augue porttitor velit, et egestas odio est a dui. Integer tincidunt consequat ante nec vehicula. Etiam vehicula diam ipsum, lobortis mattis odio dapibus ac. Nam elementum lobortis ligula, vel pharetra nunc rutrum eu. Duis commodo convallis elit elementum viverra. Nam dapibus ex quis auctor volutpat.',
+							features: _elm_lang$core$Native_List.fromArray(
+								['Suspendisse volutpat at odio sed dignissim.', 'Donec sit amet sem vulputate neque tempor elementum.', 'Sed nec lorem eu felis fringilla faucibus.', 'Pellentesque pharetra luctus velit imperdiet lobortis. Praesent rutrum condimentum tempus.']),
+							postDescription: 'In eget cursus leo. Sed a ex ex. Nam sit amet est iaculis, maximus magna eu, porta metus. Sed eu ex finibus, rhoncus lectus sit amet, facilisis eros. Pellentesque id ipsum rhoncus, pulvinar justo id, lobortis nisl. Curabitur porttitor mi nibh, sit amet iaculis neque iaculis bibendum. Praesent consectetur mi a magna dapibus, sed placerat lacus interdum. In egestas vel tellus eget tincidunt. Curabitur eros nisi, bibendum a lorem vitae, vehicula interdum ipsum. Sed quis egestas ex.'
+						},
+							{
+							id: 'sample-7',
+							name: 'Sample Hotel 7',
+							popularity: -7,
+							countryId: 'crit',
+							stars: 3,
 							bgPhotoUrl: 'bg_4.jpg',
 							photoUrls: _elm_lang$core$Native_List.fromArray(
 								[]),

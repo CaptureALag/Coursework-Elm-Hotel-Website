@@ -49,6 +49,9 @@ var _user$project$Models$PriceOption = F3(
 	function (a, b, c) {
 		return {name: a, personCapacity: b, price: c};
 	});
+var _user$project$Models$Pagination = function (a) {
+	return {ctor: 'Pagination', _0: a};
+};
 var _user$project$Models$SetFilterByCountry = function (a) {
 	return {ctor: 'SetFilterByCountry', _0: a};
 };

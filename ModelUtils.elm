@@ -6,14 +6,24 @@ import String exposing(toInt)
 import Result exposing(toMaybe)
 import Maybe exposing (withDefault)
 
+hotelsPerPage : Int
+hotelsPerPage = 4
+
+pagesCount : Model -> Int
+pagesCount model =
+   ceiling ((toFloat (List.length (filteredHotels model))) / (toFloat hotelsPerPage))
+
+filteredHotels : Model -> List Hotel
+filteredHotels model =
+    (case model.appState.currentFilterByCountry of
+        Just country -> List.filter(\hotel -> hotel.countryId == country.id)
+        Nothing -> identity
+    ) model.appContent.hotels
+
 getHotelsOnCurrentPage : Model -> List Hotel
 getHotelsOnCurrentPage model =
-   List.take 4
-    (
-     (case model.appState.currentFilterByCountry of
-        Just country -> List.filter(\hotel -> hotel.countryId == country.id)
-        Nothing -> identity)
-
+   List.take hotelsPerPage
+    ( List.drop (hotelsPerPage*(model.appState.currentPage - 1))
     (((   case model.appState.currentSortOption of
              Popularity -> List.sortBy (.popularity)
              Stars -> List.sortBy (.stars)
@@ -27,7 +37,7 @@ getHotelsOnCurrentPage model =
              Asc -> identity
              Desc -> List.reverse
      )  
-        model.appContent.hotels))
+        (filteredHotels model)))
 
 sortingOptionLabel : SortOption -> String
 sortingOptionLabel opt =

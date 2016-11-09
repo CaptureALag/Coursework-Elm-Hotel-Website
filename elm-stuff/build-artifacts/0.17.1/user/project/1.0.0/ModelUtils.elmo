@@ -58,21 +58,33 @@ var _user$project$ModelUtils$sortingOptionLabel = function (opt) {
 			return 'Датою відправлення';
 	}
 };
+var _user$project$ModelUtils$filteredHotels = function (model) {
+	return function () {
+		var _p4 = model.appState.currentFilterByCountry;
+		if (_p4.ctor === 'Just') {
+			return _elm_lang$core$List$filter(
+				function (hotel) {
+					return _elm_lang$core$Native_Utils.eq(hotel.countryId, _p4._0.id);
+				});
+		} else {
+			return _elm_lang$core$Basics$identity;
+		}
+	}()(model.appContent.hotels);
+};
+var _user$project$ModelUtils$hotelsPerPage = 4;
+var _user$project$ModelUtils$pagesCount = function (model) {
+	return _elm_lang$core$Basics$ceiling(
+		_elm_lang$core$Basics$toFloat(
+			_elm_lang$core$List$length(
+				_user$project$ModelUtils$filteredHotels(model))) / _elm_lang$core$Basics$toFloat(_user$project$ModelUtils$hotelsPerPage));
+};
 var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
 	return A2(
 		_elm_lang$core$List$take,
-		4,
-		function () {
-			var _p4 = model.appState.currentFilterByCountry;
-			if (_p4.ctor === 'Just') {
-				return _elm_lang$core$List$filter(
-					function (hotel) {
-						return _elm_lang$core$Native_Utils.eq(hotel.countryId, _p4._0.id);
-					});
-			} else {
-				return _elm_lang$core$Basics$identity;
-			}
-		}()(
+		_user$project$ModelUtils$hotelsPerPage,
+		A2(
+			_elm_lang$core$List$drop,
+			_user$project$ModelUtils$hotelsPerPage * (model.appState.currentPage - 1),
 			function (_p5) {
 				return function () {
 					var _p6 = model.appState.currentSortOrder;
@@ -118,5 +130,6 @@ var _user$project$ModelUtils$getHotelsOnCurrentPage = function (model) {
 									});
 						}
 					}()(_p5));
-			}(model.appContent.hotels)));
+			}(
+				_user$project$ModelUtils$filteredHotels(model))));
 };

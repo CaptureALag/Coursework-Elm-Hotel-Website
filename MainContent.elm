@@ -18,11 +18,19 @@ renderMainContent model =
 
 renderMenuPage : Model -> Html Msg
 renderMenuPage model =
-   div [class "menu-page"] 
-      (
-         (renderHeadling model)::
-         ( List.map renderMenuPageItem (getHotelsOnCurrentPage model) )
-      )
+   let currentPage = model.appState.currentPage
+   in div [class "menu-page"] 
+        ( List.append (
+            (renderHeadling model)::
+            ( List.map renderMenuPageItem (getHotelsOnCurrentPage model) )
+          )
+          (if (pagesCount model) == 1 then [] else [div [class "pagination"] 
+            [ button [onClick (Pagination (-1)), classList [("hidden", currentPage == 1), ("page-prev", True)]] []
+            , span [] [ text ((toString currentPage) ++ " сторінка") ]
+            , button [onClick (Pagination 1), classList [("hidden", currentPage == (pagesCount model)), ("page-next", True)]] []        
+            ]
+          ])
+        )
 
 
 renderHotelPage : Model -> Hotel -> Html Msg

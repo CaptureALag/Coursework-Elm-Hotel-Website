@@ -9,6 +9,7 @@ type Msg =
   | RouteChange Route
   | LogoClick
   | SetFilterByCountry (Maybe Country)
+  | Pagination Int
 
 type alias Model =
     { appState : AppState

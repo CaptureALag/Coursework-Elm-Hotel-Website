@@ -290,6 +290,7 @@ var _user$project$MainContent$renderHotelPage = F2(
 				]));
 	});
 var _user$project$MainContent$renderMenuPage = function (model) {
+	var currentPage = model.appState.currentPage;
 	return A2(
 		_elm_lang$html$Html$div,
 		_elm_lang$core$Native_List.fromArray(
@@ -297,12 +298,81 @@ var _user$project$MainContent$renderMenuPage = function (model) {
 				_elm_lang$html$Html_Attributes$class('menu-page')
 			]),
 		A2(
-			_elm_lang$core$List_ops['::'],
-			_user$project$MainContent$renderHeadling(model),
+			_elm_lang$core$List$append,
 			A2(
-				_elm_lang$core$List$map,
-				_user$project$MainContent$renderMenuPageItem,
-				_user$project$ModelUtils$getHotelsOnCurrentPage(model))));
+				_elm_lang$core$List_ops['::'],
+				_user$project$MainContent$renderHeadling(model),
+				A2(
+					_elm_lang$core$List$map,
+					_user$project$MainContent$renderMenuPageItem,
+					_user$project$ModelUtils$getHotelsOnCurrentPage(model))),
+			_elm_lang$core$Native_Utils.eq(
+				_user$project$ModelUtils$pagesCount(model),
+				1) ? _elm_lang$core$Native_List.fromArray(
+				[]) : _elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('pagination')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(
+							_elm_lang$html$Html$button,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Events$onClick(
+									_user$project$Models$Pagination(-1)),
+									_elm_lang$html$Html_Attributes$classList(
+									_elm_lang$core$Native_List.fromArray(
+										[
+											{
+											ctor: '_Tuple2',
+											_0: 'hidden',
+											_1: _elm_lang$core$Native_Utils.eq(currentPage, 1)
+										},
+											{ctor: '_Tuple2', _0: 'page-prev', _1: true}
+										]))
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[])),
+							A2(
+							_elm_lang$html$Html$span,
+							_elm_lang$core$Native_List.fromArray(
+								[]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text(
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										_elm_lang$core$Basics$toString(currentPage),
+										' сторінка'))
+								])),
+							A2(
+							_elm_lang$html$Html$button,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Events$onClick(
+									_user$project$Models$Pagination(1)),
+									_elm_lang$html$Html_Attributes$classList(
+									_elm_lang$core$Native_List.fromArray(
+										[
+											{
+											ctor: '_Tuple2',
+											_0: 'hidden',
+											_1: _elm_lang$core$Native_Utils.eq(
+												currentPage,
+												_user$project$ModelUtils$pagesCount(model))
+										},
+											{ctor: '_Tuple2', _0: 'page-next', _1: true}
+										]))
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[]))
+						]))
+				])));
 };
 var _user$project$MainContent$renderMainContent = function (model) {
 	return A2(
