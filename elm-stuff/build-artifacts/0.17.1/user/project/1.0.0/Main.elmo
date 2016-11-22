@@ -1,3 +1,5 @@
+var _user$project$Main$phoneIsValid = _elm_lang$core$Regex$contains(
+	_elm_lang$core$Regex$regex('(^\\+?38\\d{10}$)|(^\\d{10}$)'));
 var _user$project$Main$updateAppState = F2(
 	function (f, model) {
 		var appState = model.appState;
@@ -45,12 +47,28 @@ var _user$project$Main$update = function (msg) {
 						st,
 						{currentFilterByCountry: _p0._0, currentPage: 1});
 				});
-		default:
+		case 'Pagination':
 			return _user$project$Main$updateAppState(
 				function (st) {
 					return _elm_lang$core$Native_Utils.update(
 						st,
 						{currentPage: st.currentPage + _p0._0});
+				});
+		case 'FormPhoneChange':
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.update(
+						st,
+						{formPhone: _p0._0});
+				});
+		default:
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _user$project$Main$phoneIsValid(st.formPhone) ? _elm_lang$core$Native_Utils.update(
+						st,
+						{formSubmitted: true}) : _elm_lang$core$Native_Utils.update(
+						st,
+						{formFailureMessage: 'Перевірте правильність телефону'});
 				});
 	}
 };
@@ -73,7 +91,7 @@ var _user$project$Main$main = {
 	main: _elm_lang$html$Html_App$beginnerProgram(
 		{
 			model: {
-				appState: {selectedNavIcon: 'icon-navigation', currentRoute: _user$project$Models$MenuPage, currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Desc, currentPage: 1, currentFilterByCountry: _elm_lang$core$Maybe$Nothing},
+				appState: {selectedNavIcon: 'icon-navigation', currentRoute: _user$project$Models$MenuPage, currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Desc, currentPage: 1, currentFilterByCountry: _elm_lang$core$Maybe$Nothing, formSubmitted: false, formPhone: '', formFailureMessage: ''},
 				appContent: {
 					countries: _elm_lang$core$Native_List.fromArray(
 						[

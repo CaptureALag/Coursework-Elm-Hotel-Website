@@ -5,6 +5,7 @@ import Html.Events exposing (onClick)
 import Dict exposing (Dict)
 import ContentLayout exposing (renderLayout)
 import Models exposing (..)
+import Regex exposing (..)
 
 import Debug
 
@@ -20,6 +21,10 @@ main =
         , currentSortOrder = Desc
         , currentPage = 1
         , currentFilterByCountry = Nothing
+
+        , formSubmitted = False
+        , formPhone = ""
+        , formFailureMessage = ""
         }
     , appContent =         
         { countries = 
@@ -636,6 +641,8 @@ updateAppState f model =
   let appState = model.appState
   in {model | appState = f appState}
 
+phoneIsValid : String -> Bool
+phoneIsValid = Regex.contains (Regex.regex "(^\\+?38\\d{10}$)|(^\\d{10}$)")
 
 update : Msg -> Model -> Model
 update msg =
@@ -652,3 +659,11 @@ update msg =
       updateAppState (\st -> { st | currentFilterByCountry = country, currentPage = 1 })
     Pagination delta ->
       updateAppState (\st -> { st | currentPage = st.currentPage + delta})
+    FormPhoneChange newPhone ->
+      updateAppState (\st -> { st | formPhone = newPhone})
+    FormSubmit ->
+      updateAppState(\st ->
+        if phoneIsValid st.formPhone
+        then { st | formSubmitted = True }
+        else { st | formFailureMessage = "Перевірте правильність телефону" }
+      )

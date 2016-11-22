@@ -10,6 +10,8 @@ type Msg =
   | LogoClick
   | SetFilterByCountry (Maybe Country)
   | Pagination Int
+  | FormPhoneChange String
+  | FormSubmit
 
 type alias Model =
     { appState : AppState
@@ -27,6 +29,9 @@ type alias AppState =
     , currentPage : Int
     , currentFilterByCountry : Maybe Country
 
+    , formSubmitted : Bool
+    , formPhone : String
+    , formFailureMessage : String
     }
 
 type Route = MenuPage | HotelPage Hotel

@@ -6,6 +6,7 @@ body {
 }
 
 .container {
+    height: 1525px;
     margin: 30px;
     position: relative;
     box-shadow: 0 0 4px 1px #777;
@@ -37,6 +38,8 @@ body {
     }
 
     footer {
+        position: absolute;
+        bottom: 0;
         width: calc(~"100% - 416px");
         padding: 25px;
         background: linear-gradient(#ccc 0%, #eee 10%, #ddd 85%,#bbb 100%);
@@ -80,6 +83,8 @@ body {
 
 .content {
     .flex-block();
+
+    background: #0000aa;
 
     & > .main-content {
         width: calc(~"100% - 366px");

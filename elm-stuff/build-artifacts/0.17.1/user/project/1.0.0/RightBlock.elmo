@@ -88,9 +88,9 @@ var _user$project$RightBlock$renderRightBlockCallback = function (appState) {
 					}
 					]))
 			]),
-		_elm_lang$core$Native_List.fromArray(
-			[
-				A2(
+		A2(
+			_elm_lang$core$List_ops['::'],
+			A2(
 				_elm_lang$html$Html$h4,
 				_elm_lang$core$Native_List.fromArray(
 					[]),
@@ -98,47 +98,84 @@ var _user$project$RightBlock$renderRightBlockCallback = function (appState) {
 					[
 						_elm_lang$html$Html$text('Замовлення дзвінка')
 					])),
-				A2(
-				_elm_lang$html$Html$input,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$type$('text'),
-						_elm_lang$html$Html_Attributes$name('name'),
-						_elm_lang$html$Html_Attributes$placeholder('Ім\'я')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$input,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$type$('text'),
-						_elm_lang$html$Html_Attributes$name('phone'),
-						_elm_lang$html$Html_Attributes$placeholder('Телефон')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$input,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$type$('text'),
-						_elm_lang$html$Html_Attributes$name('comment'),
-						_elm_lang$html$Html_Attributes$placeholder('Коментар')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[])),
-				A2(
-				_elm_lang$html$Html$button,
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html_Attributes$type$('button')
-					]),
-				_elm_lang$core$Native_List.fromArray(
-					[
-						_elm_lang$html$Html$text('OK')
-					]))
-			]));
+			appState.formSubmitted ? _elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$h5,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('success-msg')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(
+							A2(_elm_lang$core$Basics_ops['++'], 'Ви замовили дзвінок на телефон ', appState.formPhone))
+						])),
+					A2(
+					_elm_lang$html$Html$h5,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('success-msg')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('Ми зателефонуємо протягом 5 хвилин')
+						]))
+				]) : _elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$input,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$type$('text'),
+							_elm_lang$html$Html_Attributes$name('name'),
+							_elm_lang$html$Html_Attributes$placeholder('Ім\'я')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+					A2(
+					_elm_lang$html$Html$input,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$type$('text'),
+							_elm_lang$html$Html_Attributes$name('phone'),
+							_elm_lang$html$Html_Attributes$placeholder('Телефон'),
+							_elm_lang$html$Html_Events$onInput(_user$project$Models$FormPhoneChange)
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+					A2(
+					_elm_lang$html$Html$input,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$type$('text'),
+							_elm_lang$html$Html_Attributes$name('comment'),
+							_elm_lang$html$Html_Attributes$placeholder('Коментар')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[])),
+					A2(
+					_elm_lang$html$Html$button,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$type$('button'),
+							_elm_lang$html$Html_Events$onClick(_user$project$Models$FormSubmit)
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text('OK')
+						])),
+					A2(
+					_elm_lang$html$Html$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$class('fail-msg')
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(appState.formFailureMessage)
+						]))
+				])));
 };
 var _user$project$RightBlock$renderRightBlockNavigation = F2(
 	function (appState, appContent) {
