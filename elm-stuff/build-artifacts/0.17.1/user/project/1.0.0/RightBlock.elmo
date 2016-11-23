@@ -8,6 +8,9 @@ var _user$project$RightBlock$renderBlog = function (model) {
 		A2(
 			_elm_lang$core$List$map,
 			function (entry) {
+				var isSelected = _elm_lang$core$Native_Utils.eq(
+					model.appState.selectedBlogEntryId,
+					_elm_lang$core$Maybe$Just(entry.id));
 				return A2(
 					_elm_lang$html$Html$div,
 					_elm_lang$core$Native_List.fromArray(
@@ -37,15 +40,28 @@ var _user$project$RightBlock$renderBlog = function (model) {
 									_elm_lang$html$Html$text(entry.header)
 								])),
 							A2(
-							_elm_lang$html$Html$a,
+							_elm_lang$html$Html$div,
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html_Attributes$href('#'),
-									_elm_lang$html$Html_Attributes$class('read-more')
+									_elm_lang$html$Html_Attributes$class('full-text')
 								]),
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html$text('Читати далі')
+									_elm_lang$html$Html$text(
+									isSelected ? entry.fullText : '')
+								])),
+							A2(
+							_elm_lang$html$Html$a,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Attributes$class('read-more'),
+									_elm_lang$html$Html_Events$onClick(
+									_user$project$Models$ToggleBlogEntrySelected(entry.id))
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text(
+									isSelected ? 'Згорнути' : 'Читати далі')
 								]))
 						]));
 			},

@@ -74,10 +74,13 @@ renderBlog : Model -> Html Msg
 renderBlog model =
    div [class "blog"]
       (List.map (\entry -> 
+        let isSelected = model.appState.selectedBlogEntryId == (Just entry.id)
+          in
            div [class "entry"] 
              [ div [class "time"] [text entry.timePosted]
              , div [class "preview"] [text entry.header]
-             , a [href "#", class "read-more"] [text "Читати далі"]         
+             , div [class "full-text"] [text (if isSelected then entry.fullText else "")] 
+             , a [class "read-more", onClick (ToggleBlogEntrySelected entry.id)] [text (if isSelected then "Згорнути" else "Читати далі")]         
              ]     
          ) model.appContent.blog
       )

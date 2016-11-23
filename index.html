@@ -8005,10 +8005,27 @@ var _user$project$Models$Model = F2(
 	function (a, b) {
 		return {appState: a, appContent: b};
 	});
-var _user$project$Models$AppState = F9(
-	function (a, b, c, d, e, f, g, h, i) {
-		return {selectedNavIcon: a, currentRoute: b, currentSortOption: c, currentSortOrder: d, currentPage: e, currentFilterByCountry: f, formSubmitted: g, formPhone: h, formFailureMessage: i};
-	});
+var _user$project$Models$AppState = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return {selectedNavIcon: a, currentRoute: b, currentSortOption: c, currentSortOrder: d, currentPage: e, currentFilterByCountry: f, formSubmitted: g, formPhone: h, formFailureMessage: i, selectedBlogEntryId: j};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
 var _user$project$Models$AppContent = F3(
 	function (a, b, c) {
 		return {countries: a, hotels: b, blog: c};
@@ -8056,6 +8073,9 @@ var _user$project$Models$PriceOption = F3(
 	function (a, b, c) {
 		return {name: a, personCapacity: b, price: c};
 	});
+var _user$project$Models$ToggleBlogEntrySelected = function (a) {
+	return {ctor: 'ToggleBlogEntrySelected', _0: a};
+};
 var _user$project$Models$FormSubmit = {ctor: 'FormSubmit'};
 var _user$project$Models$FormPhoneChange = function (a) {
 	return {ctor: 'FormPhoneChange', _0: a};
@@ -8232,6 +8252,9 @@ var _user$project$RightBlock$renderBlog = function (model) {
 		A2(
 			_elm_lang$core$List$map,
 			function (entry) {
+				var isSelected = _elm_lang$core$Native_Utils.eq(
+					model.appState.selectedBlogEntryId,
+					_elm_lang$core$Maybe$Just(entry.id));
 				return A2(
 					_elm_lang$html$Html$div,
 					_elm_lang$core$Native_List.fromArray(
@@ -8261,15 +8284,28 @@ var _user$project$RightBlock$renderBlog = function (model) {
 									_elm_lang$html$Html$text(entry.header)
 								])),
 							A2(
-							_elm_lang$html$Html$a,
+							_elm_lang$html$Html$div,
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html_Attributes$href('#'),
-									_elm_lang$html$Html_Attributes$class('read-more')
+									_elm_lang$html$Html_Attributes$class('full-text')
 								]),
 							_elm_lang$core$Native_List.fromArray(
 								[
-									_elm_lang$html$Html$text('Читати далі')
+									_elm_lang$html$Html$text(
+									isSelected ? entry.fullText : '')
+								])),
+							A2(
+							_elm_lang$html$Html$a,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Attributes$class('read-more'),
+									_elm_lang$html$Html_Events$onClick(
+									_user$project$Models$ToggleBlogEntrySelected(entry.id))
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text(
+									isSelected ? 'Згорнути' : 'Читати далі')
 								]))
 						]));
 			},
@@ -9145,7 +9181,7 @@ var _user$project$Main$update = function (msg) {
 						st,
 						{formPhone: _p0._0});
 				});
-		default:
+		case 'FormSubmit':
 			return _user$project$Main$updateAppState(
 				function (st) {
 					return _user$project$Main$phoneIsValid(st.formPhone) ? _elm_lang$core$Native_Utils.update(
@@ -9153,6 +9189,20 @@ var _user$project$Main$update = function (msg) {
 						{formSubmitted: true}) : _elm_lang$core$Native_Utils.update(
 						st,
 						{formFailureMessage: 'Перевірте правильність телефону'});
+				});
+		default:
+			var _p1 = _p0._0;
+			return _user$project$Main$updateAppState(
+				function (st) {
+					return _elm_lang$core$Native_Utils.eq(
+						st.selectedBlogEntryId,
+						_elm_lang$core$Maybe$Just(_p1)) ? _elm_lang$core$Native_Utils.update(
+						st,
+						{selectedBlogEntryId: _elm_lang$core$Maybe$Nothing}) : _elm_lang$core$Native_Utils.update(
+						st,
+						{
+							selectedBlogEntryId: _elm_lang$core$Maybe$Just(_p1)
+						});
 				});
 	}
 };
@@ -9175,7 +9225,7 @@ var _user$project$Main$main = {
 	main: _elm_lang$html$Html_App$beginnerProgram(
 		{
 			model: {
-				appState: {selectedNavIcon: 'icon-navigation', currentRoute: _user$project$Models$MenuPage, currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Desc, currentPage: 1, currentFilterByCountry: _elm_lang$core$Maybe$Nothing, formSubmitted: false, formPhone: '', formFailureMessage: ''},
+				appState: {selectedNavIcon: 'icon-navigation', currentRoute: _user$project$Models$MenuPage, currentSortOption: _user$project$Models$Popularity, currentSortOrder: _user$project$Models$Desc, currentPage: 1, currentFilterByCountry: _elm_lang$core$Maybe$Nothing, formSubmitted: false, formPhone: '', formFailureMessage: '', selectedBlogEntryId: _elm_lang$core$Maybe$Nothing},
 				appContent: {
 					countries: _elm_lang$core$Native_List.fromArray(
 						[
@@ -9186,10 +9236,10 @@ var _user$project$Main$main = {
 						]),
 					blog: _elm_lang$core$Native_List.fromArray(
 						[
-							{id: 1, timePosted: '12.08', header: 'На території готеля Cassandra Mare відкрився новий ресторан \"MARE A NORI\" ', fullText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse orci erat, porttitor vel fringilla ut, lobortis vitae risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec ac dui odio. Donec a finibus purus. Nullam quis lacus vitae leo commodo placerat id ac lorem. Ut eleifend urna quis mattis volutpat. Donec malesuada purus eget arcu porta, in rutrum nisl pulvinar. Aenean finibus, massa vel bibendum efficitur, libero lacus pretium mauris, at sollicitudin enim neque a arcu. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.'},
-							{id: 2, timePosted: '10.08', header: 'Nulla facilisi. Nam maximus nisi eget egestas bibendum. Pellentesque in molestie libero.', fullText: 'Nam placerat massa et tempor feugiat. Curabitur suscipit tellus sodales elit vulputate, ut tincidunt ligula ullamcorper. Pellentesque suscipit bibendum sem at pellentesque. Nam tristique purus ligula, id volutpat lectus porta in. Duis tortor sem, egestas non pellentesque quis, bibendum sit amet odio. Vestibulum vitae euismod tortor. Quisque ex ante, fermentum eget efficitur sed, pharetra id nunc. Vivamus gravida massa dolor, at tempus justo molestie eu. Nulla in ultricies mi. Suspendisse auctor turpis dapibus quam porta, sit amet convallis sem finibus. Quisque sit amet eros commodo, fermentum arcu eu, congue lectus. Vivamus aliquam malesuada ultrices. Aliquam erat volutpat.\n              \n              Donec sed nisi feugiat, fringilla diam tempor, aliquam lorem. Cras maximus ultricies purus quis tristique. Etiam venenatis facilisis nunc, mattis elementum tortor lobortis eu. Integer a congue felis, et lobortis lorem. Vestibulum interdum finibus mauris et lobortis. Nullam non leo commodo, bibendum erat sit amet, accumsan odio. Morbi sit amet nunc vitae lacus vulputate fringilla sed quis est. Pellentesque magna ipsum, ultrices in pulvinar nec, varius tempor eros. Nunc fermentum dolor sit amet congue euismod. Donec fringilla neque nulla, vel consectetur ex bibendum at. Maecenas fermentum congue velit, eget luctus purus. Morbi ullamcorper ultricies nulla vitae tincidunt. Morbi purus nisl, suscipit vel mollis vitae, cursus ut justo. Mauris nec felis orci. Ut nec luctus erat. '},
-							{id: 3, timePosted: '09.08', header: 'Aliquam fringilla sapien vitae orci malesuada, id eleifend ante semper.', fullText: 'Nullam tempor ullamcorper erat. Sed bibendum lectus ut purus efficitur, eu posuere lectus eleifend. Sed fringilla felis in cursus egestas. Quisque gravida eleifend lacus ut pulvinar. Ut viverra arcu vel elementum volutpat. Phasellus pharetra dolor id dignissim auctor. Nunc ut luctus diam. Ut convallis lacinia metus quis fringilla. Quisque eget erat felis. Aliquam finibus elit eros, et faucibus nisi placerat a. Nam ullamcorper nunc vulputate ante lobortis, at tincidunt ipsum ultricies. Vestibulum mattis sit amet justo et dictum. Vestibulum sit amet volutpat nunc, quis tincidunt tellus. Curabitur a velit ex. Ut et dolor ultrices, tincidunt orci ac, vehicula felis. '},
-							{id: 4, timePosted: '07.08', header: 'Quisque non odio fermentum, eleifend mi vitae, imperdiet enim. Duis elementum sed orci eu aliquam.', fullText: ' Donec et pharetra erat. Sed in metus id augue feugiat bibendum sit amet vitae augue. Integer semper orci diam. Praesent luctus molestie erat vitae rutrum. Duis felis leo, suscipit in orci eget, feugiat faucibus nisi. Vestibulum maximus, eros id feugiat ornare, velit urna gravida justo, et iaculis elit eros a elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum odio quam, aliquet sed magna sed, vulputate tincidunt sapien. Quisque nec ligula placerat, gravida quam eget, luctus sapien. Nulla ac risus pulvinar, pellentesque turpis nec, tempus sapien. '}
+							{id: 1, timePosted: '12.08', header: 'На території готеля Cassandra Mare відкрився новий ресторан \"MARE A NORI\" ', fullText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse orci erat, porttitor vel fringilla ut, lobortis vitae risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec ac dui odio. Donec a finibus purus. Nullam quis lacus vitae leo commodo placerat id ac lorem. Ut eleifend urna quis mattis volutpat.'},
+							{id: 2, timePosted: '10.08', header: 'Nulla facilisi. Nam maximus nisi eget egestas bibendum. Pellentesque in molestie libero.', fullText: 'Nam placerat massa et tempor feugiat. Curabitur suscipit tellus sodales elit vulputate, ut tincidunt ligula ullamcorper. Pellentesque suscipit bibendum sem at pellentesque. Nam tristique purus ligula, id volutpat lectus porta in. Duis tortor sem, egestas non pellentesque quis, bibendum sit amet odio. Vestibulum vitae euismod tortor.'},
+							{id: 3, timePosted: '09.08', header: 'Aliquam fringilla sapien vitae orci malesuada, id eleifend ante semper.', fullText: 'Nullam tempor ullamcorper erat. Sed bibendum lectus ut purus efficitur, eu posuere lectus eleifend. Sed fringilla felis in cursus egestas. Quisque gravida eleifend lacus ut pulvinar. Ut viverra arcu vel elementum volutpat. Phasellus pharetra dolor id dignissim auctor. Nunc ut luctus diam. Ut convallis lacinia metus quis fringilla. Quisque eget erat felis.'},
+							{id: 4, timePosted: '07.08', header: 'Quisque non odio fermentum, eleifend mi vitae, imperdiet enim. Duis elementum sed orci eu aliquam.', fullText: ' Donec et pharetra erat. Sed in metus id augue feugiat bibendum sit amet vitae augue. Integer semper orci diam. Praesent luctus molestie erat vitae rutrum. Duis felis leo, suscipit in orci eget, feugiat faucibus nisi. Vestibulum maximus, eros id feugiat ornare, velit urna gravida justo, et iaculis elit eros a elit.'}
 						]),
 					hotels: _elm_lang$core$Native_List.fromArray(
 						[

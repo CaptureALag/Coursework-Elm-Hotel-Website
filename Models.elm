@@ -12,6 +12,7 @@ type Msg =
   | Pagination Int
   | FormPhoneChange String
   | FormSubmit
+  | ToggleBlogEntrySelected Int
 
 type alias Model =
     { appState : AppState
@@ -32,6 +33,8 @@ type alias AppState =
     , formSubmitted : Bool
     , formPhone : String
     , formFailureMessage : String
+
+    , selectedBlogEntryId : Maybe Int
     }
 
 type Route = MenuPage | HotelPage Hotel
