@@ -1,7 +1,7 @@
 module RightBlock exposing (renderRightBlock, renderTopMostNavIcons)
 
 import Html exposing(..)
-import Html.Attributes exposing(href, class, classList, rel, type', name, placeholder, value, style, src)
+import Html.Attributes exposing(href, class, classList, rel, type', name, placeholder, value, style, src, srcdoc, target)
 import Html.Events exposing (onClick, onInput)
 import Models exposing (..)
 import ModelUtils exposing(getHotelsOnCurrentPage)
@@ -14,6 +14,7 @@ renderRightBlock model =
       , renderRightBlockCallback model.appState
       , renderRightBlockReviews model.appState
       , renderBlog model
+      , renderShareLinks
       ] 
 
 renderTopMostNavIcons : AppState -> Html Msg
@@ -84,3 +85,14 @@ renderBlog model =
              ]     
          ) model.appContent.blog
       )
+
+renderShareLinks : Html Msg
+renderShareLinks = 
+  div [class "share-links"]
+  [ a 
+    [ class "facebook", href "https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Frawgit.com%2FCaptureALag%2FCoursework-Elm-Hotel-Website%2Fmaster%2Findex.html&src=sdkpreparse", target "_blank"] 
+    []
+  , a
+    [ class "twitter", href "https://twitter.com/intent/tweet?text=Обирай%20готелі%20на%20Returnal", target "_blank"] 
+    []
+  ]

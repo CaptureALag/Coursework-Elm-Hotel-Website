@@ -1,3 +1,32 @@
+var _user$project$RightBlock$renderShareLinks = A2(
+	_elm_lang$html$Html$div,
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html_Attributes$class('share-links')
+		]),
+	_elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_lang$html$Html$a,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('facebook'),
+					_elm_lang$html$Html_Attributes$href('https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Frawgit.com%2FCaptureALag%2FCoursework-Elm-Hotel-Website%2Fmaster%2Findex.html&src=sdkpreparse'),
+					_elm_lang$html$Html_Attributes$target('_blank')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[])),
+			A2(
+			_elm_lang$html$Html$a,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('twitter'),
+					_elm_lang$html$Html_Attributes$href('https://twitter.com/intent/tweet?text=Обирай%20готелі%20на%20Returnal'),
+					_elm_lang$html$Html_Attributes$target('_blank')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[]))
+		]));
 var _user$project$RightBlock$renderBlog = function (model) {
 	return A2(
 		_elm_lang$html$Html$div,
@@ -322,6 +351,7 @@ var _user$project$RightBlock$renderRightBlock = function (model) {
 				A2(_user$project$RightBlock$renderRightBlockNavigation, model.appState, model.appContent),
 				_user$project$RightBlock$renderRightBlockCallback(model.appState),
 				_user$project$RightBlock$renderRightBlockReviews(model.appState),
-				_user$project$RightBlock$renderBlog(model)
+				_user$project$RightBlock$renderBlog(model),
+				_user$project$RightBlock$renderShareLinks
 			]));
 };

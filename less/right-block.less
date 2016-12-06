@@ -144,6 +144,17 @@ button {
         background: #d3e97c;
     }
 
+    & > .share-links {
+        position: absolute;
+        z-index: 999;
+        right: 10px;
+        bottom: 20px;
+        & > a {
+            display: inline-block !important;
+            margin-right: 20px;
+        }
+    }
+
     &::after {
         content: "";
         display: block;
