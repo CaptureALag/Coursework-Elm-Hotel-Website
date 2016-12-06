@@ -3,6 +3,12 @@
 	font-family: 'Rubik', sans-serif;
 	background: rgba(57, 91, 112, 1);
 	padding: 10px 0;
+	height: 19px;
+
+	@media screen and (max-width: 1337px) {
+		height: 48px
+	}
+
 
 	& > .back-button {
     	display: inline-block;
@@ -47,6 +53,12 @@
 				&:hover {
 					text-decoration: underline;
 				}
+				@media screen and (max-width: 830px) {
+					margin: 0 5px;
+				}
+			}
+			@media screen and (max-width: 1400px) {
+				font-size: 13px;
 			}
 		}
 
@@ -60,6 +72,13 @@
 				margin-right: unset;
 				text-align: center;
 				margin-bottom: 10px;
+			}
+		}
+
+		@media screen and (max-width: 1070px) {
+			font-size: 12px;
+			& > label {
+				margin-top: 3px;
 			}
 		}
 	}

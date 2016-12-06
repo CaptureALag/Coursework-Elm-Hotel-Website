@@ -11,9 +11,19 @@ body {
     position: relative;
     box-shadow: 0 0 4px 1px #777;
 
+    min-width: 675px;
+
     @media screen and (min-width: 1400px) {
         margin: 30px auto;
         width: 1340px;
+    }
+
+    @media screen and (max-width: 1337px) {
+        height: 1525px;
+    }
+
+    @media screen and (max-width: 720px) {
+        margin: 0;
     }
     
     header {
@@ -34,6 +44,10 @@ body {
             background-position: 100px 25px;
 
             cursor: pointer;
+
+            @media screen and (max-width: 720px) {
+                margin-left: -75px;
+            }
         }
     }
 
@@ -43,6 +57,11 @@ body {
         width: calc(~"100% - 416px");
         padding: 25px;
         background: linear-gradient(#ccc 0%, #eee 10%, #ddd 85%,#bbb 100%);
+        height: 79px;
+
+        @media screen and (max-width: 950px) {
+            width: calc(~"100% - 250px");
+        }
 
         h5, .numbers-container > span {
             margin: 0;
@@ -51,6 +70,10 @@ body {
             font-weight: normal;
             font-size: 24px;
             font-family: 'Oranienbaum', serif;
+
+            @media screen and (max-width: 1300px) {
+                font-size: 18px;
+            }
         }
 
         h5 {
@@ -67,6 +90,13 @@ body {
             & > span {
                 display: inline-block;
                 letter-spacing: 1px;
+            }
+
+            @media screen and (max-width: 1070px) {
+                position: absolute;
+                left: 300px;
+                top: 20px;
+                width: 220px;
             }
         }
 
@@ -87,10 +117,18 @@ body {
     background: #1d2f43;
     height: 1239px;
 
+    @media screen and (max-width: 1337px) {
+        height: 1267px;
+    }
+
     & > .main-content {
         width: calc(~"100% - 366px");
 //        overflow: hidden;
         position: relative;
+
+        @media screen and (max-width: 950px) {
+            width: calc(~"100% - 200px");
+        }
     }
 }
 

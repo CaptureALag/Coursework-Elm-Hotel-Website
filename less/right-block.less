@@ -24,6 +24,15 @@ button {
     //height: calc(~"100% + 128px");
     top: 0;
 
+    @media screen and (max-width: 1337px) {
+        height: 1397px;
+    }
+
+    @media screen and (max-width: 950px) {
+        width: 200px;
+        right: -200px;
+    }
+
     & > nav, & > .callback-form, & > .reviews {
         display: block;
         overflow: hidden;
@@ -78,7 +87,7 @@ button {
             display: block;
             height: 30px;
             padding: 10px;
-            width: 287px;
+            width: 90%;
             margin-top: 25px;
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.6);
@@ -109,6 +118,10 @@ button {
             &:hover {
                 background-color: rgba(255,255,255,0.9)
             }
+
+            @media screen and (max-width: 950px) {
+                margin-top: 20px;
+            }
         }
 
         & > .fail-msg {
@@ -120,6 +133,10 @@ button {
             font-size: 18px;
             color: white;
             opacity: 0.8;
+
+            @media screen and (max-width: 950px) {
+                margin-top: 40px;
+            }
         }
     }
 

@@ -47,6 +47,10 @@ figure.menu-item {
 		    color: rgba(255,255,255,0.6);
 		    font-family: 'Amatica SC', cursive;
 			font-weight: bold;
+
+			@media screen and (max-width: 1150px) {
+				width: 170px;
+			}
 		}
 
 		& > .hotel-info {
@@ -57,10 +61,16 @@ figure.menu-item {
 			top: 0;
 			bottom: 0;
 
+			@media screen and (max-width: 1150px) {
+				left: 170px;
+			}
+
 			& > [class^=stars] {
 
-				float: right;
+				width: calc(~"100% - 40px");
 				margin: 15px;
+				height: 32px;
+				margin-bottom: 0;
 
 				.star-loop(@i) when (@i > 0) {
 					&.stars-@{i} {
@@ -71,6 +81,7 @@ figure.menu-item {
 				.star-loop(5);
 
 				& > .star {
+					float: right;
 					margin-left: 5px;
 					display: inline-block;
 					background: url('../img/star1px.png');
@@ -85,9 +96,14 @@ figure.menu-item {
 
 			& > h5.name {
 				font-size: 48px;
-				margin-top: 20px;
+				margin-top: 0;
 				font-family: 'Amatica SC', cursive;
-				margin-bottom: 37px;
+				margin-bottom: 0;
+				height: 75px;
+				line-height: 52px;
+				@media screen and (max-width: 800px) {
+					font-size: 40px;
+				}
 			}
 
 			& > h6 {
@@ -98,6 +114,9 @@ figure.menu-item {
 
 				&.duration, &.depart {
 					font-size: 22px;
+					@media screen and (max-width: 800px) {
+						font-size: 18px;
+					}
 				}
 
 				&.price-from {
